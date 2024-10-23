@@ -24,6 +24,7 @@ gem 'ostruct'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
+gem "devise", "~> 4.9"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
@@ -45,3 +46,6 @@ group :development do
   gem "web-console"
 end
 
+
+
+gem "cpf_cnpj", "~> 0.5.0"

@@ -1,0 +1,59 @@
+<div class="flex justify-center items-center mx-auto w-6/12">
+  <div class="w-9/12 p-6 shadow-lg bg-white rounded-md">
+    <h1 class="text-2xl block text-center font-semibold">Registre seu restaurante</h1>
+    <hr class="mt-3">
+    <%= form_with model: @restaurant do |f| %>
+      <div class="field">
+        <%= f.label :corporate_name %>
+        <%= f.text_field :corporate_name, class: 'mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500' %>
+        <% if @restaurant.errors[:corporate_name].any? %>
+          <span class="text-red-500 text-sm"><%= Restaurant.human_attribute_name(:corporate_name) %> <%= @restaurant.errors[:corporate_name].first %></span>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :brand_name %>
+        <%= f.text_field :brand_name, class: 'mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500' %>
+        <% if @restaurant.errors[:brand_name].any? %>
+          <span class="text-red-500 text-sm"><%= Restaurant.human_attribute_name(:brand_name) %> <%= @restaurant.errors[:brand_name].first %></span>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :cnpj %>
+        <%= f.text_field :cnpj, class: 'mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500' %>
+        <% if @restaurant.errors[:cnpj].any? %>
+          <span class="text-red-500 text-sm"><%= Restaurant.human_attribute_name(:cnpj) %> <%= @restaurant.errors[:cnpj].first %></span>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500' %>
+        <% if @restaurant.errors[:email].any? %>
+          <span class="text-red-500 text-sm"><%= Restaurant.human_attribute_name(:email) %> <%= @restaurant.errors[:email].first %></span>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :full_address %>
+        <%= f.text_field :full_address, class: 'mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500' %>
+        <% if @restaurant.errors[:full_address].any? %>
+          <span class="text-red-500 text-sm"><%= Restaurant.human_attribute_name(:full_address) %> <%= @restaurant.errors[:full_address].first %></span>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :phone_number %>
+        <%= f.text_field :phone_number, class: 'mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500' %>
+        <% if @restaurant.errors[:phone_number].any? %>
+          <span class="text-red-500 text-sm"><%= Restaurant.human_attribute_name(:phone_number) %> <%= @restaurant.errors[:phone_number].first %></span>
+        <% end %>
+      </div>
+
+      <div class="actions mt-3 w-full flex justify-center"> 
+        <%= f.submit "Cadastrar", class: 'dark:bg-gray-700 py-2 w-full border border-transparent rounded-md shadow-lg text-lg font-medium text-white hover:dark:bg-gray-800 cursor-pointer focus:outline-none focus:ring-2 transition duration-200 focus:ring-offset-2 focus:ring-blue-500' %>
+      </div>
+    <% end %>
+  </div>
+</div>

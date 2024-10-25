@@ -29,6 +29,9 @@
         <% if alert.present? %>
           <p class="bg-red-200 text-red-800 p-4 rounded text-center"><%= alert %></p>
         <% end %>
+        <% if flash[:info].present? %>
+          <p class="bg-blue-200 text-blue-800 p-4 rounded text-center"><%= flash[:info] %></p>
+        <% end %>
     </div>
     <main class="container mx-auto mt-12 px-5 flex max-w-screen-xl">
       <%= yield %>

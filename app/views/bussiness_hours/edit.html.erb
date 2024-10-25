@@ -1,0 +1,41 @@
+<div>
+<div class="text-3xl font-bold mb-6">
+  <h1 >Atualizar horário</h1>
+</div>
+
+<%= form_with model: [@restaurant, @bussiness_hour], class: "space-y-6" do |f| %>
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+   
+    <div class="col-span-2">
+      <%= f.label :day_of_week, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :day_of_week, readonly: true, class: "mt-1 block w-full border-gray-300 bg-gray-100 text-gray-500 cursor-not-allowed rounded-md shadow-sm focus:ring-0 focus:border-gray-300 sm:text-sm" %>
+    </div>
+    
+    <div>
+      <%= f.label :opening_hour, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.time_field :opening_hour, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+      <% if @bussiness_hour.errors[:opening_hour].any? %>
+        <span class="text-red-500 text-sm"><%= BussinessHour.human_attribute_name(:opening_hour) %> <%= @bussiness_hour.errors[:opening_hour].first %></span>
+      <% end %>
+    </div>
+
+    <div>
+      <%= f.label :closing_hour, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.time_field :closing_hour, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+      <% if @bussiness_hour.errors[:closing_hour].any? %>
+        <span class="text-red-500 text-sm"><%= BussinessHour.human_attribute_name(:closing_hour) %> <%= @bussiness_hour.errors[:closing_hour].first %></span>
+      <% end %>
+    </div>
+
+    <div>
+        <%= f.label :is_open, "Está aberto?" %>
+        <%= f.check_box :is_open %>
+    </div>
+    
+  </div>
+
+  <div class="mt-6">
+    <%= f.submit 'Salvar Horário', class: "w-full bg-indigo-600 text-white font-medium py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+  </div>
+<% end %>
+</div>

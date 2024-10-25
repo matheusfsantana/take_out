@@ -5,9 +5,12 @@
         <% end %>
 
         <% if user_signed_in? %>
+                <% if has_restaurant? %>
+                    <%= link_to 'Horário de Funcionamento', restaurant_bussiness_hours_path(user_restaurant)%>
+                <% end %>
            <div class="flex items-center">
-                <span class="mr-3"><%= current_user.name.capitalize %></span> <!-- Alinhar o texto do nome do usuário -->
-                <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: 'text-white' %> <!-- Estilização do botão -->
+                <span class="mr-3"><%= current_user.name.capitalize %></span>
+                <%= button_to 'Sair', destroy_user_session_path, method: :delete, class: 'text-white' %> 
             </div>
         <% end %>
     </div>

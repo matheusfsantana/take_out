@@ -14,8 +14,8 @@ describe 'User sign up' do
 
     expect(page).to have_content 'Joãozinho'
     expect(page).to have_content 'Sair'
-    expect(page).to have_content 'Conta criada com sucesso.'
-    expect(current_path).to eq root_path
+    expect(page).to have_content 'É necessário registrar seu restaurante antes de prosseguir'
+    expect(current_path).to eq new_restaurant_path
 
   end
   it "and don't fill all fields" do

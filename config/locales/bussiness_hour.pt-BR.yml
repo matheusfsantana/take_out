@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      bussiness_hour: Horário de Funcionamento
+    attributes:
+      bussiness_hour:
+        day_of_week: Dia da Semana
+        opening_hour: Horário de Abertura
+        closing_hour: Horário de Fechamento
+        is_open: 'Aberto'
+        restaurant_id: Restaurante
+        restaurant: Restaurante
+    

@@ -1,0 +1,12 @@
+pt-BR:
+  activerecord:
+    models:
+      dish: Prato
+    attributes:
+      dish:
+        name: Nome
+        description: Descrição
+        calories: Calorias
+        restaurant_id: Restaurante
+        restaurant: Restaurante
+        image: Imagem

@@ -1,0 +1,13 @@
+pt-BR:
+  activerecord:
+    models:
+      menu_item: Cardápio
+    attributes:
+      menu_item:
+        name: Nome
+        description: Descrição
+        calories: Calorias
+        alcoholic: Alcoólico
+        restaurant_id: Restaurante
+        restaurant: Restaurante
+        image: Imagem

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   ###
   devise_for :users
   resources :restaurants, only: [:new, :create] do
+    resources :dishes
     resources :bussiness_hours, only: [:index, :edit, :update]
   end
   root "home#index"

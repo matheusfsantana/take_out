@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :check_if_user_has_restaurant, unless: :devise_controller?
+  before_action :redirect_unless_owner
  
   protected
   def check_if_user_has_restaurant
@@ -19,5 +20,11 @@ class ApplicationController < ActionController::Base
   
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :last_name, :cpf])
+  end
+
+  def redirect_unless_owner
+    if params[:restaurant_id].present?
+      redirect_to root_path unless params[:restaurant_id].to_i == user_restaurant.id
+    end
   end
 end

@@ -1,7 +1,7 @@
 class BeveragesController < ApplicationController
   def index
     @restaurant = user_restaurant
-    @beverages = Beverage.all
+    @beverages = Beverage.where(restaurant: user_restaurant)
   end
 
   def new 
@@ -19,7 +19,8 @@ class BeveragesController < ApplicationController
   end
 
   def show
-    
+    @beverage = Beverage.find_by(id: params[:id], restaurant: user_restaurant)
+    redirect_to root_path if @beverage.nil?
   end
 
   def beverage_params

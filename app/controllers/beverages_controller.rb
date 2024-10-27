@@ -23,6 +23,24 @@ class BeveragesController < ApplicationController
     redirect_to root_path if @beverage.nil?
   end
 
+  def edit
+    @restaurant = user_restaurant
+    @beverage = Beverage.find_by(id: params[:id], restaurant: user_restaurant)
+    redirect_to root_path if @beverage.nil?
+  end
+
+  def update
+    @beverage = Beverage.find_by(id: params[:id], restaurant: user_restaurant)
+    return redirect_to restaurant_beverage_path(user_restaurant, @beverage), notice: 'Bebida atualizada com sucesso.' if @beverage.update(beverage_params)
+    @restaurant = user_restaurant
+    render :edit, status: :unprocessable_entity
+  end
+
+  def destroy
+    @beverage = Beverage.find_by(id: params[:id])
+    redirect_to restaurant_beverages_path(user_restaurant), notice: "Bebida excluída com sucesso" if @beverage.destroy
+  end
+
   def beverage_params
     params.require(:beverage).permit(:name, :description, :calories, :alcoholic, :image)
   end

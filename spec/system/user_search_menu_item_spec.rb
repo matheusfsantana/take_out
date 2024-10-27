@@ -170,4 +170,34 @@ describe 'User search for menu item' do
     expect(page).to have_checked_field 'Alcoólico'
     expect(page).to have_field 'Imagem'
   end
+  it "and should search successfull for dishes and beverages descriptions and access to the DISH DETAILS PAGE" do
+    user = User.create!(email: 'teste@gmail.com', password: 'password1234', cpf: '00085364061', name: 'teste', last_name: 'da silva')
+    restaurant = Restaurant.create!(corporate_name: 'hot lanches xyz', brand_name: 'hot lanches', cnpj: '84685592000112',
+                      full_address:'Rua da Hot, 721 - RJ',email:'contato@hotlanches.com', phone_number: '81987654321', user: user)
+    dish = Dish.create!(name: 'Bife a cavalo', description: 'Prato da casa', calories: 10, restaurant: restaurant)
+
+    login_as(user)
+    visit root_path
+    
+    fill_in 'Buscar Cardápio', with: "Casa"
+    click_on 'Buscar'
+    click_on 'Bife a cavalo'
+
+    expect(current_path).to eq restaurant_dish_path(restaurant, dish)
+  end
+  it "and should search successfull for dishes and beverages descriptions and access to the BEVERAGE DETAILS PAGE" do
+    user = User.create!(email: 'teste@gmail.com', password: 'password1234', cpf: '00085364061', name: 'teste', last_name: 'da silva')
+    restaurant = Restaurant.create!(corporate_name: 'hot lanches xyz', brand_name: 'hot lanches', cnpj: '84685592000112',
+                      full_address:'Rua da Hot, 721 - RJ',email:'contato@hotlanches.com', phone_number: '81987654321', user: user)
+    beverage = Beverage.create!(name: 'Cerveja', description: 'Cerveja artesanal da casa', calories: 300, alcoholic: true, restaurant: restaurant)
+
+    login_as(user)
+    visit root_path
+    
+    fill_in 'Buscar Cardápio', with: "Casa"
+    click_on 'Buscar'
+    click_on 'Cerveja'
+
+    expect(current_path).to eq restaurant_beverage_path(restaurant, beverage)
+  end
 end

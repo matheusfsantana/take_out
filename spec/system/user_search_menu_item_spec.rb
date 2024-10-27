@@ -79,8 +79,8 @@ describe 'User search for menu item' do
     user = User.create!(email: 'teste@gmail.com', password: 'password1234', cpf: '00085364061', name: 'teste', last_name: 'da silva')
     restaurant = Restaurant.create!(corporate_name: 'hot lanches xyz', brand_name: 'hot lanches', cnpj: '84685592000112',
                       full_address:'Rua da Hot, 721 - RJ',email:'contato@hotlanches.com', phone_number: '81987654321', user: user)
-    dish = Dish.create!(name: 'Cereja', description: 'testando', calories: 10, restaurant: restaurant)
-    beverage = Beverage.create!(name: 'Cerveja', description: 'Cerveja artesanal da casa', calories: 300, alcoholic: true, restaurant: restaurant)
+    Dish.create!(name: 'Cereja', description: 'testando', calories: 10, restaurant: restaurant)
+    Beverage.create!(name: 'Cerveja', description: 'Cerveja artesanal da casa', calories: 300, alcoholic: true, restaurant: restaurant)
 
     login_as(user)
     visit root_path
@@ -97,8 +97,8 @@ describe 'User search for menu item' do
     user = User.create!(email: 'teste@gmail.com', password: 'password1234', cpf: '00085364061', name: 'teste', last_name: 'da silva')
     restaurant = Restaurant.create!(corporate_name: 'hot lanches xyz', brand_name: 'hot lanches', cnpj: '84685592000112',
                       full_address:'Rua da Hot, 721 - RJ',email:'contato@hotlanches.com', phone_number: '81987654321', user: user)
-    dish = Dish.create!(name: 'Bife a cavalo', description: 'Prato da casa', calories: 10, restaurant: restaurant)
-    beverage = Beverage.create!(name: 'Cerveja', description: 'Cerveja artesanal da casa', calories: 300, alcoholic: true, restaurant: restaurant)
+    Dish.create!(name: 'Bife a cavalo', description: 'Prato da casa', calories: 10, restaurant: restaurant)
+    Beverage.create!(name: 'Cerveja', description: 'Cerveja artesanal da casa', calories: 300, alcoholic: true, restaurant: restaurant)
 
     login_as(user)
     visit root_path
@@ -117,8 +117,8 @@ describe 'User search for menu item' do
     user = User.create!(email: 'teste@gmail.com', password: 'password1234', cpf: '00085364061', name: 'teste', last_name: 'da silva')
     restaurant = Restaurant.create!(corporate_name: 'hot lanches xyz', brand_name: 'hot lanches', cnpj: '84685592000112',
                       full_address:'Rua da Hot, 721 - RJ',email:'contato@hotlanches.com', phone_number: '81987654321', user: user)
-    dish = Dish.create!(name: 'Bife a cavalo', description: 'Prato da casa', calories: 10, restaurant: restaurant)
-    beverage = Beverage.create!(name: 'Cerveja', description: 'Cerveja artesanal da casa', calories: 300, alcoholic: true, restaurant: restaurant)
+    Dish.create!(name: 'Bife a cavalo', description: 'Prato da casa', calories: 10, restaurant: restaurant)
+    Beverage.create!(name: 'Cerveja', description: 'Cerveja artesanal da casa', calories: 300, alcoholic: true, restaurant: restaurant)
 
     login_as(user)
     visit root_path

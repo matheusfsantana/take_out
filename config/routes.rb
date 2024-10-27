@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :dishes
     resources :beverages
     resources :bussiness_hours, only: [:index, :edit, :update]
+
+    get 'menu_items/search', to: 'menu_items#search'
   end
   root "home#index"
 end

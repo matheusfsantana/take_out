@@ -2,7 +2,7 @@ class DishesController < ApplicationController
 
   def index 
     @restaurant = user_restaurant
-    @dishes = Dish.all
+    @dishes = Dish.where(restaurant: user_restaurant)
   end
 
   def new

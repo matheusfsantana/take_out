@@ -6,7 +6,17 @@
   <div class="flex flex-wrap gap-6">
     <% if @dishes.any? %>
         <% @dishes.each do |dish| %>
-          <div class="border border-gray-200 w-96 p-6 rounded-lg shadow flex items-center">
+          <div class="border border-gray-200 w-96 p-6 rounded-lg shadow flex items-center relative">
+            <div class="absolute top-2 right-2 flex items-center space-x-1">
+              <% if dish.is_active %>
+                <span class="text-gray-700 text-sm font-semibold">Ativo</span>
+                <%= image_tag 'green_circle.png' %>
+              <% else %>
+                <span class="text-gray-700 text-sm font-semibold">Inativo</span>
+                <%= image_tag "red_circle.png" %>
+              <% end %>
+            </div>
+
             <% if dish.image.attached? %>
                 <%= image_tag dish.image, alt: dish.name, class: "w-32 h-32 object-cover rounded-lg mr-6"%>
             <% else %>

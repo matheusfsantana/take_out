@@ -21,7 +21,8 @@ class DishesController < ApplicationController
   
   def show
     @dish = Dish.find_by(id: params[:id], restaurant: user_restaurant)
-    redirect_to root_path if @dish.nil?
+    return redirect_to root_path if @dish.nil?
+    @button_value = @dish.is_active ? 'Desativar' : 'Ativar'
   end
 
   def edit

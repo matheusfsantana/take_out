@@ -20,7 +20,8 @@ class BeveragesController < ApplicationController
 
   def show
     @beverage = Beverage.find_by(id: params[:id], restaurant: user_restaurant)
-    redirect_to root_path if @beverage.nil?
+    return redirect_to root_path if @beverage.nil?
+    @button_value = @beverage.is_active ? 'Desativar' : 'Ativar'
   end
 
   def edit

@@ -1,5 +1,6 @@
 class MenuItem < ApplicationRecord
   belongs_to :restaurant
+  has_many :menu_item_options
   has_one_attached :image
   validates :name, :description, presence: true
   validate :calories_must_be_positive, :image_format_need_to_be_valid

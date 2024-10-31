@@ -1,0 +1,8 @@
+pt-BR:
+  activerecord:
+    models:
+      menu_item_option: Opção de porção
+    attributes:
+      menu_item_option:
+        description: Descrição da porção
+        price: 'Preço'

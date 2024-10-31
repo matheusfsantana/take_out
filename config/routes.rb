@@ -4,8 +4,11 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   devise_for :users
   resources :restaurants, only: [:new, :create] do
-    resources :dishes
-    resources :beverages
+    resources :dishes 
+    resources :beverages 
+    resources :menu_items, only: [] do
+      resources :options, controller: 'menu_item_options', only: [:new, :create, :edit, :update]
+    end
     resources :bussiness_hours, only: [:index, :edit, :update]
 
     get 'menu_items/search', to: 'menu_items#search'

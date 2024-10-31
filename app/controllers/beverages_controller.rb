@@ -19,8 +19,10 @@ class BeveragesController < ApplicationController
   end
 
   def show
-    @beverage = Beverage.find_by(id: params[:id], restaurant: user_restaurant)
+    @menu_item = MenuItem.find_by(id: params[:id], restaurant: user_restaurant )
+    @beverage = @menu_item
     return redirect_to root_path if @beverage.nil?
+    @options = @beverage.menu_item_options
     @button_value = @beverage.is_active ? 'Desativar' : 'Ativar'
   end
 

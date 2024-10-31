@@ -20,8 +20,10 @@ class DishesController < ApplicationController
   end
   
   def show
-    @dish = Dish.find_by(id: params[:id], restaurant: user_restaurant)
+    @menu_item = MenuItem.find_by(id: params[:id], restaurant: user_restaurant )
+    @dish = @menu_item
     return redirect_to root_path if @dish.nil?
+    @options = @dish.menu_item_options
     @button_value = @dish.is_active ? 'Desativar' : 'Ativar'
   end
 

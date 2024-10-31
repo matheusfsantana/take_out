@@ -1,4 +1,6 @@
-<%= link_to "Voltar", restaurant_dish_path(@restaurant, @dish), class: "bg-gray-400 text-white py-2 px-4 rounded hover:bg-gray-500" %>
+<%= link_to restaurant_dish_path(@restaurant, @dish), class: "flex items-center" do %>
+  <%= image_tag 'left_arrow.png'%>
+<% end %>
 
 <div class="max-w-lg mt-12 mb-6 px-4">
   <div class="text-3xl font-bold mb-6">

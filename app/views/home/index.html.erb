@@ -1,6 +1,57 @@
 
+<h1 class="text-2xl font-bold text-gray-800 mb-2">Bem-vindo ao PaLevá, <%= current_user.name %></h1>
+<span class="text-gray-800"> Selecione o menu que você gostaria de acessar</span>
 
-<div class="grid grid-cols-4 gap-4">
-    <h1> Home </h1>
-    <p class="font-mono">TreinaDev</p>
+<div class="flex flex-wrap item-center gap-4 mt-14">
+    <%= link_to restaurant_dishes_path(user_restaurant) do %>
+        <div class="max-w-md p-6 bg-white border border-gray-200 rounded-lg ">
+            <div class="flex item-center w-1/3">
+                <%= image_tag 'dish_icon.png', class: "w-8 h-8 object-cover rounded-lg mr-3" %>
+                <h5 class="mb-2 text-2xl font-semibold  text-gray-900">Pratos</h5>
+            </div>
+            <hr class="border-t border-gray-300 my-2 mb-4">
+            <div class="h-48 bg-slate-50 border p-2 rounded-lg">
+                <ul class="list-inside list-disc space-y-2">
+                    <li>Cadastro e edição de pratos</li>
+                    <li>Informações do prato</li>
+                    <li>Cadastro e edição de porções de pratos</li>
+                    <li>Histórico de preços de pratos</li>
+                </ul>
+            </div>
+        </div>
+    <% end %>
+
+    <%= link_to restaurant_beverages_path(user_restaurant) do %>
+        <div class="max-w-md p-6 bg-white border border-gray-200 rounded-lg ">
+            <div class="flex item-center w-1/3">
+                <%= image_tag 'beverage_icon.png', class: "w-8 h-8 object-cover rounded-lg mr-3" %>
+                <h5 class="mb-2 text-2xl font-semibold text-gray-900">Bebidas</h5>
+            </div>
+            <hr class="border-t border-gray-300 my-2 mb-4">
+            <div class="h-48 bg-slate-50 border p-2 rounded-lg">
+                <ul class="list-inside list-disc space-y-2">
+                    <li>Cadastro e edição de bebidas</li>
+                    <li>Informações da bebida</li>
+                    <li>Cadastro e edição de porções de bebidas</li>
+                    <li>Histórico de preços de bebidas</li>
+                </ul>
+            </div>
+        </div>
+    <% end %>
+
+    <%= link_to restaurant_bussiness_hours_path(user_restaurant) do %>
+        <div class="max-w-md p-6 bg-white border border-gray-200 rounded-lg ">
+            <div class="flex item-center w-1/3>">
+                <%= image_tag 'calendar_icon.png', class: "w-8 h-8 object-cover rounded-lg mr-3" %>
+                <h5 class="mb-2 text-2xl font-semibold  text-gray-900">Horário de Funcionamento</h5>
+            </div>
+            <hr class="border-t border-gray-300 my-2 mb-4">
+            <div class="h-48 bg-slate-50 border p-2 rounded-lg">
+                <ul class="list-inside list-disc space-y-2">
+                    <li>Informações do horário de funcionamento</li>
+                    <li>Atualização do horário de funcionamento</li>
+                </ul>
+            </div>
+        </div>
+    <% end %>
 </div>

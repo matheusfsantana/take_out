@@ -1,10 +1,10 @@
-<%= link_to restaurant_dish_path(@restaurant, @dish), class: "flex items-center" do %>
-  <%= image_tag 'left_arrow.png'%>
-<% end %>
 
 <div class="max-w-lg mt-12 mb-6 px-4">
-  <div class="text-3xl font-bold mb-6">
-    <h1>Atualizar prato</h1>
+   <div class="w-full flex items-center justify-start mb-6">
+      <%= link_to restaurant_dishes_path do %>
+        <%= image_tag 'left_arrow.png'%>
+      <% end %>
+      <h1 class="ml-3 text-3xl font-bold text-gray-800">Atualizar prato</h1>
   </div>
 
   <%= form_with model: [@restaurant, @dish], class: "space-y-6" do |f| %>

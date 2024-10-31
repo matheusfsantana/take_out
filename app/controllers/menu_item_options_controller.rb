@@ -3,6 +3,7 @@ class MenuItemOptionsController < ApplicationController
     @restaurant = Restaurant.find_by(id: params[:restaurant_id])
     @menu_item = MenuItem.find_by(id: params[:menu_item_id])
     @option = MenuItemOption.new
+    @path = @menu_item.type == 'Dish' ? restaurant_dish_path(@restaurant, @menu_item.id) : restaurant_beverage_path(@restaurant, @menu_item.id)
   end
 
   def create
@@ -16,6 +17,7 @@ class MenuItemOptionsController < ApplicationController
       return redirect_to restaurant_dish_path(@restaurant, @menu_item) if @menu_item.type == 'Dish'
       return redirect_to restaurant_beverage_path(@restaurant, @menu_item)
     end
+    @path = @menu_item.type == 'Dish' ? restaurant_dish_path(@restaurant, @menu_item.id) : restaurant_beverage_path(@restaurant, @menu_item.id)
     flash.now[:alert] = "Ocorreu um erro ao cadastrar porção"
     render :new, status: :unprocessable_entity
   end

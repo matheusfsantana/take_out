@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      option_historical: Histórico da porção
+    attributes:
+      option_historical:
+        historical_price: Preço histórico
+        price_changed_at: Preço atualizado em
+        menu_item_option: Opção de porção
+        menu_item_option_id: Opção de porção

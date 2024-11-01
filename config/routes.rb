@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :beverages 
     resources :menu_items, only: [] do
       resources :options, controller: 'menu_item_options', only: [:new, :create, :edit, :update]
+      resources :option_historicals, only: [:index]
     end
     resources :bussiness_hours, only: [:index, :edit, :update]
 

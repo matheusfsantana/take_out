@@ -1,5 +1,5 @@
 class DishesController < ApplicationController
-
+  
   def index 
     @restaurant = user_restaurant
     @dishes = Dish.where(restaurant: user_restaurant)

@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-describe 'User update an attribute' do
-  it "and unauthenticated users shouldn't access to the attribute form" do
+describe 'User update an tag' do
+  it "and unauthenticated users shouldn't access to the tag form" do
     user = User.create!(email: 'teste@gmail.com', password: 'password1234', cpf: '00085364061', name: 'teste', last_name: 'da silva')
     restaurant = Restaurant.create!(corporate_name: 'hot lanches xyz', brand_name: 'hot lanches', cnpj: '84685592000112',
                                     full_address:'Rua da Hot, 721 - RJ',email:'contato@hotlanches.com', phone_number: '81987654321', user: user)
 
-    attribute = Attribute.create!(name: 'Apimentado', restaurant: restaurant)  
+    tag = Tag.create!(name: 'Apimentado', restaurant: restaurant)  
 
-    visit edit_restaurant_attribute_path(restaurant, attribute)
+    visit edit_restaurant_tag_path(restaurant, tag)
 
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
     expect(current_path).to eq new_user_session_path
@@ -23,10 +23,10 @@ describe 'User update an attribute' do
     Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
                        full_address:'Rua da Hot, 721 - RJ',email:'contato@lanches.com', phone_number: '81987654321', user: second_user)
     
-    attribute = Attribute.create!(name: 'Apimentado', restaurant: first_restaurant)  
+    tag = Tag.create!(name: 'Apimentado', restaurant: first_restaurant)  
    
     login_as(second_user)
-    visit edit_restaurant_attribute_path(first_restaurant, attribute)
+    visit edit_restaurant_tag_path(first_restaurant, tag)
 
     expect(current_path).to eq root_path
   end
@@ -35,7 +35,7 @@ describe 'User update an attribute' do
     user = User.create!(email: 'teste@gmail.com', password: 'password1234', cpf: '00085364061', name: 'teste', last_name: 'da silva')
     restaurant = Restaurant.create!(corporate_name: 'hot lanches xyz', brand_name: 'hot lanches', cnpj: '84685592000112',
                       full_address:'Rua da Hot, 721 - RJ',email:'contato@hotlanches.com', phone_number: '81987654321', user: user)
-    attribute = Attribute.create!(name: 'Apimentado', restaurant: restaurant)  
+    tag = Tag.create!(name: 'Apimentado', restaurant: restaurant)  
 
     login_as(user)
     visit root_path
@@ -43,17 +43,17 @@ describe 'User update an attribute' do
     click_on 'Editar'
 
     expect(page).to have_field 'Marcador', with: 'Apimentado'
-    expect(current_path).to eq edit_restaurant_attribute_path(restaurant, attribute)
+    expect(current_path).to eq edit_restaurant_tag_path(restaurant, tag)
   end
 
   it 'and should update successfully' do
     user = User.create!(email: 'teste@gmail.com', password: 'password1234', cpf: '00085364061', name: 'teste', last_name: 'da silva')
     restaurant = Restaurant.create!(corporate_name: 'hot lanches xyz', brand_name: 'hot lanches', cnpj: '84685592000112',
                       full_address:'Rua da Hot, 721 - RJ',email:'contato@hotlanches.com', phone_number: '81987654321', user: user)           
-    attribute = Attribute.create!(name: 'Apimentado', restaurant: restaurant)  
+    tag = Tag.create!(name: 'Apimentado', restaurant: restaurant)  
 
     login_as(user)
-    visit edit_restaurant_attribute_path(restaurant, attribute)
+    visit edit_restaurant_tag_path(restaurant, tag)
     fill_in 'Marcador', with: 'Picante'
     click_on 'Atualizar marcador'
 
@@ -61,17 +61,17 @@ describe 'User update an attribute' do
     expect(page).to have_content 'Marcador atualizado com sucesso'
     expect(page).to have_content 'Picante'
     expect(page).not_to have_content 'Apimentado'
-    expect(current_path).to eq restaurant_attributes_path(restaurant)
+    expect(current_path).to eq restaurant_tags_path(restaurant)
   end
 
   it 'and should display an error message when name field is empty' do
     user = User.create!(email: 'teste@gmail.com', password: 'password1234', cpf: '00085364061', name: 'teste', last_name: 'da silva')
     restaurant = Restaurant.create!(corporate_name: 'hot lanches xyz', brand_name: 'hot lanches', cnpj: '84685592000112',
                       full_address:'Rua da Hot, 721 - RJ',email:'contato@hotlanches.com', phone_number: '81987654321', user: user)
-    attribute = Attribute.create!(name: 'Apimentado', restaurant: restaurant)  
+    tag = Tag.create!(name: 'Apimentado', restaurant: restaurant)  
 
     login_as(user)
-    visit edit_restaurant_attribute_path(restaurant, attribute)
+    visit edit_restaurant_tag_path(restaurant, tag)
     fill_in 'Marcador', with: ''
     click_on 'Atualizar marcador'
 

@@ -1,4 +1,4 @@
-class Attribute < ApplicationRecord
+class Tag < ApplicationRecord
   belongs_to :restaurant
 
   validates :name, presence: true

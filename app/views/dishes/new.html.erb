@@ -36,7 +36,7 @@
           <span class="text-red-500 text-sm"><%= Dish.human_attribute_name(:calories) %> <%= @dish.errors[:calories].first %></span>
         <% end %>
       </div>
-
+      
       <div class="col-span-2">
         <%= f.label :image, 'Imagem', class: "block text-sm font-medium text-gray-700" %>
         <%= f.file_field :image %>

@@ -8,6 +8,7 @@ class DishesController < ApplicationController
   def new
     @restaurant = user_restaurant
     @dish = Dish.new
+    @tags = Tag.where(restaurant: @restaurant)
   end
   
   def create
@@ -16,6 +17,7 @@ class DishesController < ApplicationController
     @dish.restaurant = @restaurant
 
     return redirect_to restaurant_dishes_path(@restaurant), notice: 'Novo prato cadastrado com sucesso.' if @dish.save
+    @tags = Tag.where(restaurant: @restaurant)
     render :new, status: :unprocessable_entity
   end
   
@@ -23,6 +25,7 @@ class DishesController < ApplicationController
     @menu_item = MenuItem.find_by(id: params[:id], restaurant: user_restaurant )
     @dish = @menu_item
     return redirect_to root_path if @dish.nil?
+    @tags = @dish.tags
     @options = @dish.menu_item_options
     @button_value = @dish.is_active ? 'Desativar' : 'Ativar'
   end
@@ -30,6 +33,7 @@ class DishesController < ApplicationController
   def edit
     @restaurant = user_restaurant
     @dish = Dish.find_by(id: params[:id], restaurant: user_restaurant)
+    @tags = Tag.where(restaurant: @restaurant)
     redirect_to root_path if @dish.nil?
   end
 
@@ -37,6 +41,7 @@ class DishesController < ApplicationController
     @dish = Dish.find_by(id: params[:id], restaurant: user_restaurant)
     return redirect_to restaurant_dish_path(user_restaurant, @dish), notice: 'Prato atualizado com sucesso.' if @dish.update(dish_params)
     @restaurant = user_restaurant
+    @tags = Tag.where(restaurant: @restaurant)
     render :edit, status: :unprocessable_entity
   end
 
@@ -47,6 +52,6 @@ class DishesController < ApplicationController
 
   private
   def dish_params
-    params.require(:dish).permit(:name, :description, :calories, :image)
+    params.require(:dish).permit(:name, :description, :calories, :image, tag_ids: [])
   end
 end

@@ -17,6 +17,18 @@
           <span class="text-red-500 text-sm"><%= Dish.human_attribute_name(:name) %> <%= @dish.errors[:name].first %></span>
         <% end %>
       </div>
+
+        <div class="col-span-2">
+        <%= f.label :tag_ids, 'Marcador', class: "block text-sm font-medium text-gray-700" %>
+          <% if @tags.nil? %>
+            <p>Nenhum marcador cadastrado.</p>
+          <% else %>
+            <%= f.collection_check_boxes(:tag_ids, @tags, :id, :name) do |b| %>
+                <%= b.check_box %>
+                <%= b.label(class: "text-sm text-gray-900 mr-2") %>
+            <% end %>
+          <% end %>
+      </div>
       
       <div class="col-span-2">
         <%= f.label :description, class: "block text-sm font-medium text-gray-700" %>

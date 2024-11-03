@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_03_213157) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_03_214909) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -57,6 +57,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_03_213157) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["menu_item_id"], name: "index_menu_item_options_on_menu_item_id"
+  end
+
+  create_table "menu_item_tags", force: :cascade do |t|
+    t.integer "menu_item_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["menu_item_id"], name: "index_menu_item_tags_on_menu_item_id"
+    t.index ["tag_id"], name: "index_menu_item_tags_on_tag_id"
   end
 
   create_table "menu_items", force: :cascade do |t|
@@ -122,6 +131,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_03_213157) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bussiness_hours", "restaurants"
   add_foreign_key "menu_item_options", "menu_items"
+  add_foreign_key "menu_item_tags", "menu_items"
+  add_foreign_key "menu_item_tags", "tags"
   add_foreign_key "menu_items", "restaurants"
   add_foreign_key "option_historicals", "menu_item_options"
   add_foreign_key "restaurants", "users"

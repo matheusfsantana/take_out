@@ -17,7 +17,12 @@ describe 'User visit dish details page' do
     restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: '34.651.791/0001-31',
                                     full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
     dish = Dish.create!(name: 'teste', description: 'testando', calories: 10, restaurant: restaurant)
+    tag_1 = Tag.create!(name: 'Apimentado', restaurant: restaurant)
+    tag_2 = Tag.create!(name: 'Vegano', restaurant: restaurant)
+    MenuItemTag.create!(menu_item: dish, tag: tag_1)
+    MenuItemTag.create!(menu_item: dish, tag: tag_2)
 
+    
     login_as(user)
     visit root_path
     click_on 'Pratos'
@@ -27,5 +32,7 @@ describe 'User visit dish details page' do
     expect(page).to have_content 'teste'
     expect(page).to have_content 'testando'
     expect(page).to have_content '10'
+    expect(page).to have_content 'Apimentado'
+    expect(page).to have_content 'Vegano'
   end
 end

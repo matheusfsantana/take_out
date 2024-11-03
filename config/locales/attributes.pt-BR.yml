@@ -1,0 +1,7 @@
+pt-BR:
+  activerecord:
+    models:
+      attribute: Marcador
+    attributes:
+      attribute:
+        name: Marcador

@@ -1,0 +1,22 @@
+<div class="w-full flex items-center justify-start mb-6">
+    <%= link_to restaurant_attributes_path(@restaurant) do %>
+      <%= image_tag 'left_arrow.png'%>
+    <% end %>
+    <h1 class="ml-3 text-3xl font-bold text-gray-800">Cadastrar novo marcador</h1>
+</div>
+
+<div class="w-96" >
+  <%= form_with(model: [@restaurant, @attribute]) do |f| %>
+    <div class="mb-4">
+      <%= f.label :name, class: "block text-sm font-medium text-gray-700" %>
+      <%= f.text_field :name, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>
+      <% if @attribute.errors[:name].any? %>
+        <span class="text-red-500 text-sm"><%= Attribute.human_attribute_name(:name) %> <%= @attribute.errors[:name ].first %></span>
+      <% end %>
+    </div>
+
+    <div class="flex items-center justify-end">
+      <%= f.submit "Cadastrar marcador", class: "dark:bg-gray-700 py-2 px-4 border border-transparent rounded-md shadow-lg text-lg font-medium text-white hover:dark:bg-gray-800 cursor-pointer focus:outline-none focus:ring-2 transition duration-200 focus:ring-offset-2 focus:ring-blue-500" %>
+    </div>
+  <% end %>
+</div>

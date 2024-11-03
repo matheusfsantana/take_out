@@ -15,6 +15,7 @@
 
              <div class="flex space-x-4"> 
                 <%= link_to 'Inicio', root_path %>
+                <%= link_to 'Marcadores', restaurant_attributes_path(user_restaurant) %>
                 <%= link_to 'Pratos', restaurant_dishes_path(user_restaurant) %>
                 <%= link_to 'Bebidas', restaurant_beverages_path(user_restaurant) %>
                 <%= link_to 'Horário de Funcionamento', restaurant_bussiness_hours_path(user_restaurant) %>

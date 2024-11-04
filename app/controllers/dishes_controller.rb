@@ -3,6 +3,13 @@ class DishesController < ApplicationController
   def index 
     @restaurant = user_restaurant
     @dishes = Dish.where(restaurant: user_restaurant)
+    @tags = Tag.where(restaurant: @restaurant)
+    if params[:filter_tag].present?
+      @dishes = Dish.joins(:menu_item_tags, :tags)
+                    .where(restaurant: user_restaurant)
+                    .where(tags: { name: params[:filter_tag] })
+                    .distinct
+    end
   end
 
   def new

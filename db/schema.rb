@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_03_214909) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_05_205319) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -50,25 +50,25 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_03_214909) do
     t.index ["restaurant_id"], name: "index_bussiness_hours_on_restaurant_id"
   end
 
-  create_table "menu_item_options", force: :cascade do |t|
+  create_table "item_options", force: :cascade do |t|
     t.string "description"
     t.decimal "price"
-    t.integer "menu_item_id", null: false
+    t.integer "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["menu_item_id"], name: "index_menu_item_options_on_menu_item_id"
+    t.index ["item_id"], name: "index_item_options_on_item_id"
   end
 
-  create_table "menu_item_tags", force: :cascade do |t|
-    t.integer "menu_item_id", null: false
+  create_table "item_tags", force: :cascade do |t|
+    t.integer "item_id", null: false
     t.integer "tag_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["menu_item_id"], name: "index_menu_item_tags_on_menu_item_id"
-    t.index ["tag_id"], name: "index_menu_item_tags_on_tag_id"
+    t.index ["item_id"], name: "index_item_tags_on_item_id"
+    t.index ["tag_id"], name: "index_item_tags_on_tag_id"
   end
 
-  create_table "menu_items", force: :cascade do |t|
+  create_table "items", force: :cascade do |t|
     t.string "type"
     t.string "name"
     t.string "description"
@@ -78,16 +78,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_03_214909) do
     t.datetime "updated_at", null: false
     t.integer "restaurant_id", null: false
     t.boolean "is_active", default: true, null: false
-    t.index ["restaurant_id"], name: "index_menu_items_on_restaurant_id"
+    t.index ["restaurant_id"], name: "index_items_on_restaurant_id"
   end
 
   create_table "option_historicals", force: :cascade do |t|
     t.decimal "historical_price"
     t.datetime "price_changed_at"
-    t.integer "menu_item_option_id", null: false
+    t.integer "item_option_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["menu_item_option_id"], name: "index_option_historicals_on_menu_item_option_id"
+    t.index ["item_option_id"], name: "index_option_historicals_on_item_option_id"
   end
 
   create_table "restaurants", force: :cascade do |t|
@@ -130,11 +130,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_03_214909) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bussiness_hours", "restaurants"
-  add_foreign_key "menu_item_options", "menu_items"
-  add_foreign_key "menu_item_tags", "menu_items"
-  add_foreign_key "menu_item_tags", "tags"
-  add_foreign_key "menu_items", "restaurants"
-  add_foreign_key "option_historicals", "menu_item_options"
+  add_foreign_key "item_options", "items"
+  add_foreign_key "item_tags", "items"
+  add_foreign_key "item_tags", "tags"
+  add_foreign_key "items", "restaurants"
+  add_foreign_key "option_historicals", "item_options"
   add_foreign_key "restaurants", "users"
   add_foreign_key "tags", "restaurants"
 end

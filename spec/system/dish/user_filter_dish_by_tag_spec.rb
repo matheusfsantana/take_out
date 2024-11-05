@@ -7,14 +7,14 @@ describe 'User filter dish by tag' do
                                                full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: first_user)
     first_dish = Dish.create!(name: 'Prato primeiro usuario', description: 'testando', calories: 10, restaurant: first_user_restaurant)
     first_user_tag = Tag.create!(name: 'Apimentado', restaurant: first_user_restaurant)
-    MenuItemTag.create!(menu_item: first_dish, tag: first_user_tag)
+    ItemTag.create!(item: first_dish, tag: first_user_tag)
 
     second_user = User.create!(email: 'abcd@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
     second_user_restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
                                                 full_address:'Rua da Hot, 721 - RJ',email:'contato@lanches.com', phone_number: '81987654321', user: second_user)
     second_dish = Dish.create!(name: 'Prato segundo usuario', description: 'testando', calories: 10, restaurant: second_user_restaurant)
     second_user_tag = Tag.create!(name: 'Apimentado', restaurant: second_user_restaurant)
-    MenuItemTag.create!(menu_item: second_dish, tag: second_user_tag)
+    ItemTag.create!(item: second_dish, tag: second_user_tag)
 
     login_as(second_user)
     visit restaurant_dishes_path(second_user_restaurant)
@@ -36,9 +36,9 @@ describe 'User filter dish by tag' do
     first_tag = Tag.create!(name: 'Apimentado', restaurant: restaurant)
     second_tag = Tag.create!(name: 'Vegano', restaurant: restaurant)
 
-    MenuItemTag.create!(menu_item:  dish, tag: first_tag)
-    MenuItemTag.create!(menu_item:  second_dish, tag: first_tag)
-    MenuItemTag.create!(menu_item:  third_dish, tag: second_tag)
+    ItemTag.create!(item:  dish, tag: first_tag)
+    ItemTag.create!(item:  second_dish, tag: first_tag)
+    ItemTag.create!(item:  third_dish, tag: second_tag)
 
 
    
@@ -63,9 +63,9 @@ describe 'User filter dish by tag' do
     first_tag = Tag.create!(name: 'Apimentado', restaurant: restaurant)
     second_tag = Tag.create!(name: 'Vegano', restaurant: restaurant)
 
-    MenuItemTag.create!(menu_item:  dish, tag: first_tag)
-    MenuItemTag.create!(menu_item:  second_dish, tag: first_tag)
-    MenuItemTag.create!(menu_item:  third_dish, tag: second_tag)
+    ItemTag.create!(item:  dish, tag: first_tag)
+    ItemTag.create!(item:  second_dish, tag: first_tag)
+    ItemTag.create!(item:  third_dish, tag: second_tag)
 
 
    

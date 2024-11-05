@@ -5,7 +5,7 @@ class DishesController < ApplicationController
     @dishes = Dish.where(restaurant: user_restaurant)
     @tags = Tag.where(restaurant: @restaurant)
     if params[:filter_tag].present?
-      @dishes = Dish.joins(:menu_item_tags, :tags)
+      @dishes = Dish.joins(:item_tags, :tags)
                     .where(restaurant: user_restaurant)
                     .where(tags: { name: params[:filter_tag] })
                     .distinct
@@ -29,11 +29,11 @@ class DishesController < ApplicationController
   end
   
   def show
-    @menu_item = MenuItem.find_by(id: params[:id], restaurant: user_restaurant )
-    @dish = @menu_item
+    @item = Item.find_by(id: params[:id], restaurant: user_restaurant )
+    @dish = @item
     return redirect_to root_path if @dish.nil?
     @tags = @dish.tags
-    @options = @dish.menu_item_options
+    @options = @dish.item_options
     @button_value = @dish.is_active ? 'Desativar' : 'Ativar'
   end
 

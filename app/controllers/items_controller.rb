@@ -1,4 +1,4 @@
-class MenuItemsController < ApplicationController
+class ItemsController < ApplicationController
   def search
     @search = params[:query]
     if @search.empty?
@@ -13,12 +13,12 @@ class MenuItemsController < ApplicationController
   end
 
   def update_status
-    menu_item = MenuItem.find(params[:menu_item_id])
-    menu_item.update(is_active: !menu_item.is_active)
+    item = Item.find(params[:item_id])
+    item.update(is_active: !item.is_active)
 
-    status = menu_item.is_active ? 'Ativo' : 'Inativo'
+    status = item.is_active ? 'Ativo' : 'Inativo'
     flash[:notice] = "Status atualizado com sucesso para: #{status}" 
-    return redirect_to restaurant_dish_path(user_restaurant, menu_item) if menu_item.type == 'Dish'
-    redirect_to restaurant_beverage_path(user_restaurant, menu_item) if menu_item.type == 'Beverage'
+    return redirect_to restaurant_dish_path(user_restaurant, item) if item.type == 'Dish'
+    redirect_to restaurant_beverage_path(user_restaurant, item) if item.type == 'Beverage'
   end
 end

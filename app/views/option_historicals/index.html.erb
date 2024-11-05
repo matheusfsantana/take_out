@@ -6,7 +6,7 @@
 
 <div class="w-1/2 border border-gray-300 rounded-lg p-4 shadow-lg flex flex-col items-center mx-auto relative mt-4 mb-4">
   <% if @historical.present? %>
-    <h1 class="text-2xl font-bold text-gray-800 mb-2">Histórico de <%= @menu_item.name %></h1>
+    <h1 class="text-2xl font-bold text-gray-800 mb-2">Histórico de <%= @item.name %></h1>
     <table class="min-w-full divide-y divide-gray-200">
       <thead class="bg-gray-50">
         <tr>
@@ -18,7 +18,7 @@
       <tbody class="bg-white divide-y divide-gray-200">
         <% @historical.each do |h| %>
           <tr>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= h.menu_item_option.description %></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= h.item_option.description %></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= number_to_currency(h.historical_price) %></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium"> <%= I18n.localize(h.price_changed_at, format: :short) %></td>
           </tr>
@@ -26,6 +26,6 @@
       </tbody>
     </table>
   <% else %>
-    <h1 class="text-2xl font-bold text-gray-800 mb-2 text-center">Nenhuma histórico registrado para <%= @menu_item.name %></h1>
+    <h1 class="text-2xl font-bold text-gray-800 mb-2 text-center">Nenhuma histórico registrado para <%= @item.name %></h1>
   <% end %>
 </div>

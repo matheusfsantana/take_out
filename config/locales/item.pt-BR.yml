@@ -1,9 +1,9 @@
 pt-BR:
   activerecord:
     models:
-      menu_item: Cardápio
+      item: Cardápio
     attributes:
-      menu_item:
+      item:
         name: Nome
         description: Descrição
         calories: Calorias

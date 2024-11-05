@@ -19,8 +19,8 @@ describe 'User visit dish details page' do
     dish = Dish.create!(name: 'teste', description: 'testando', calories: 10, restaurant: restaurant)
     tag_1 = Tag.create!(name: 'Apimentado', restaurant: restaurant)
     tag_2 = Tag.create!(name: 'Vegano', restaurant: restaurant)
-    MenuItemTag.create!(menu_item: dish, tag: tag_1)
-    MenuItemTag.create!(menu_item: dish, tag: tag_2)
+    ItemTag.create!(item: dish, tag: tag_1)
+    ItemTag.create!(item: dish, tag: tag_2)
 
     
     login_as(user)

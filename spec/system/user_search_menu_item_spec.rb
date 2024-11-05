@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User search for menu item' do
+describe 'User search for item' do
   it "and shouldn't see the search form if isn't authenticated" do
     visit root_path
 
@@ -88,7 +88,7 @@ describe 'User search for menu item' do
     fill_in 'Buscar Cardápio', with: "Cer"
     click_on 'Buscar'
 
-    expect(current_path).to eq restaurant_menu_items_search_path(restaurant)
+    expect(current_path).to eq restaurant_items_search_path(restaurant)
     expect(page).to have_content 'Resultados da busca por: "Cer"'
     expect(page).to have_content 'Cereja'
     expect(page).to have_content 'Cerveja'
@@ -106,7 +106,7 @@ describe 'User search for menu item' do
     fill_in 'Buscar Cardápio', with: "Casa"
     click_on 'Buscar'
 
-    expect(current_path).to eq restaurant_menu_items_search_path(restaurant)
+    expect(current_path).to eq restaurant_items_search_path(restaurant)
     expect(page).to have_content 'Resultados da busca por: "Casa"'
     expect(page).to have_content 'Bife a cavalo'
     expect(page).to have_content 'Prato da casa'
@@ -126,7 +126,7 @@ describe 'User search for menu item' do
     fill_in 'Buscar Cardápio', with: "teste pesquisa"
     click_on 'Buscar'
 
-    expect(current_path).to eq restaurant_menu_items_search_path(restaurant)
+    expect(current_path).to eq restaurant_items_search_path(restaurant)
     expect(page).to have_content 'Resultados da busca por: "teste pesquisa"'
     expect(page).to have_content 'Nenhum prato encontrado'
     expect(page).to have_content 'Nenhuma bebida encontrada'

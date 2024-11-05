@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User update menu item status to active or inactive' do
+describe 'User update item status to active or inactive' do
   context 'Update Dish' do
     it 'and should see the active button when access dish details page' do
       user = User.create!(email: 'teste@gmail.com', password: 'password1234', cpf: '00085364061', name: 'teste', last_name: 'da silva')

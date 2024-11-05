@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-describe 'User can see menu item option historical after updates an option' do
+describe 'User can see item option historical after updates an option' do
   it 'and should successfully see the historical when updates an dish option' do 
     user = User.create!(email: 'teste@gmail.com', password: 'password1234', cpf: '00085364061', name: 'teste', last_name: 'da silva')
     restaurant = Restaurant.create!(corporate_name: 'hot lanches xyz', brand_name: 'hot lanches', cnpj: '84685592000112',
                                       full_address:'Rua da Hot, 721 - RJ',email:'contato@hotlanches.com', phone_number: '81987654321', user: user)
     dish = Dish.create!(name: 'Bife a cavalo', description: 'Prato da casa', calories: 10, is_active: false, restaurant: restaurant)
-    option = MenuItemOption.create!(description: 'Individual', price: 30, menu_item: dish)
+    option = ItemOption.create!(description: 'Individual', price: 30, item: dish)
 
     option.update!(price: 45)
 
@@ -25,7 +25,7 @@ describe 'User can see menu item option historical after updates an option' do
     restaurant = Restaurant.create!(corporate_name: 'hot lanches xyz', brand_name: 'hot lanches', cnpj: '84685592000112',
                                       full_address:'Rua da Hot, 721 - RJ',email:'contato@hotlanches.com', phone_number: '81987654321', user: user)
     dish = Dish.create!(name: 'Bife a cavalo', description: 'Prato da casa', calories: 10, is_active: false, restaurant: restaurant)
-    MenuItemOption.create!(description: 'Individual', price: 30, menu_item: dish)
+    ItemOption.create!(description: 'Individual', price: 30, item: dish)
 
     login_as(user)
     visit root_path
@@ -41,7 +41,7 @@ describe 'User can see menu item option historical after updates an option' do
     restaurant = Restaurant.create!(corporate_name: 'hot lanches xyz', brand_name: 'hot lanches', cnpj: '84685592000112',
                                     full_address:'Rua da Hot, 721 - RJ',email:'contato@hotlanches.com', phone_number: '81987654321', user: user)
     beverage = Beverage.create!(name: 'Suco de laranja', description: 'Suco feito da polpa', calories: 100, alcoholic: false, restaurant: restaurant)
-    option = MenuItemOption.create!(description: 'Jarra 1L', price: 19, menu_item: beverage)
+    option = ItemOption.create!(description: 'Jarra 1L', price: 19, item: beverage)
 
     option.update!(price: 21)
 
@@ -60,7 +60,7 @@ describe 'User can see menu item option historical after updates an option' do
     restaurant = Restaurant.create!(corporate_name: 'hot lanches xyz', brand_name: 'hot lanches', cnpj: '84685592000112',
                                     full_address:'Rua da Hot, 721 - RJ',email:'contato@hotlanches.com', phone_number: '81987654321', user: user)
     beverage = Beverage.create!(name: 'Suco de laranja', description: 'Suco feito da polpa', calories: 100, alcoholic: false, restaurant: restaurant)
-    MenuItemOption.create!(description: 'Jarra 1L', price: 19, menu_item: beverage)
+    ItemOption.create!(description: 'Jarra 1L', price: 19, item: beverage)
 
     login_as(user)
     visit root_path

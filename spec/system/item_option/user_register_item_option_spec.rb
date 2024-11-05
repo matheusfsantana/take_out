@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User register a menu item option from menu item details page' do
+describe 'User register a item item option from menu item details page' do
   context 'register dish options' do
     it 'and should see the register option button on dish details page' do
       user = User.create!(email: 'teste@gmail.com', password: 'password1234', cpf: '00085364061', name: 'teste', last_name: 'da silva')
@@ -28,7 +28,7 @@ describe 'User register a menu item option from menu item details page' do
       click_on 'Bife a cavalo'
       click_on 'Cadastrar porção'
 
-      expect(current_path).to eq new_restaurant_menu_item_option_path(restaurant, dish)
+      expect(current_path).to eq new_restaurant_item_option_path(restaurant, dish)
       expect(page).to have_content 'Bife a cavalo'
       expect(page).to have_field 'Descrição da porção'
       expect(page).to have_field 'Preço'
@@ -119,7 +119,7 @@ describe 'User register a menu item option from menu item details page' do
       click_on 'Suco de laranja'
       click_on 'Cadastrar porção'
 
-      expect(current_path).to eq new_restaurant_menu_item_option_path(restaurant, beverage)
+      expect(current_path).to eq new_restaurant_item_option_path(restaurant, beverage)
       expect(page).to have_content 'Suco de laranja'
       expect(page).to have_field 'Descrição da porção'
       expect(page).to have_field 'Preço'

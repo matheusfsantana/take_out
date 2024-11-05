@@ -1,5 +1,5 @@
-class MenuItemOption < ApplicationRecord
-  belongs_to :menu_item
+class ItemOption < ApplicationRecord
+  belongs_to :item
   has_many :option_historical, dependent: :destroy
 
   validates :description, :price, presence: true
@@ -8,7 +8,7 @@ class MenuItemOption < ApplicationRecord
   before_update :save_option_historical
 
   def save_option_historical
-    last_register = MenuItemOption.find_by(id: self.id)
+    last_register = ItemOption.find_by(id: self.id)
     
     if last_register.present? && last_register.price != self.price
       option_historical.create(historical_price: last_register.price, price_changed_at: Time.zone.now)

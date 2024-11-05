@@ -1,9 +1,9 @@
-class MenuItem < ApplicationRecord
+class Item < ApplicationRecord
   belongs_to :restaurant
-  has_many :menu_item_options, dependent: :destroy
-  has_many :option_historical, through: :menu_item_options
-  has_many :menu_item_tags
-  has_many :tags, through: :menu_item_tags
+  has_many :item_options, dependent: :destroy
+  has_many :option_historical, through: :item_options
+  has_many :item_tags
+  has_many :tags, through: :item_tags
   has_one_attached :image
   validates :name, :description, presence: true
   validate :calories_must_be_positive, :image_format_need_to_be_valid

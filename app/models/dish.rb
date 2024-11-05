@@ -1,2 +1,2 @@
-class Dish < MenuItem
+class Dish < Item
 end

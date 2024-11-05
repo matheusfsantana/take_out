@@ -7,14 +7,14 @@ Rails.application.routes.draw do
     resources :tags, only: [:index, :new, :create, :edit, :update]
     resources :dishes 
     resources :beverages 
-    resources :menu_items, only: [] do
-      resources :options, controller: 'menu_item_options', only: [:new, :create, :edit, :update]
+    resources :items, only: [] do
+      resources :options, controller: 'item_options', only: [:new, :create, :edit, :update]
       resources :option_historicals, only: [:index]
     end
     resources :bussiness_hours, only: [:index, :edit, :update]
 
-    get 'menu_items/search', to: 'menu_items#search'
-    post 'update_menu_item_status/:menu_item_id', to: "menu_items#update_status", as: 'update_menu_item_status'
+    get 'items/search', to: 'items#search'
+    post 'update_item_status/:item_id', to: "items#update_status", as: 'update_item_status'
   end
   root "home#index"
 end

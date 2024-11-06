@@ -85,7 +85,7 @@ describe 'User search for item' do
     login_as(user)
     visit root_path
     
-    fill_in 'Buscar Cardápio', with: "Cer"
+    fill_in 'query', with: "Cer"
     click_on 'Buscar'
 
     expect(current_path).to eq restaurant_items_search_path(restaurant)
@@ -103,7 +103,7 @@ describe 'User search for item' do
     login_as(user)
     visit root_path
     
-    fill_in 'Buscar Cardápio', with: "Casa"
+    fill_in 'query', with: "Casa"
     click_on 'Buscar'
 
     expect(current_path).to eq restaurant_items_search_path(restaurant)
@@ -123,7 +123,7 @@ describe 'User search for item' do
     login_as(user)
     visit root_path
     
-    fill_in 'Buscar Cardápio', with: "teste pesquisa"
+    fill_in 'query', with: "teste pesquisa"
     click_on 'Buscar'
 
     expect(current_path).to eq restaurant_items_search_path(restaurant)
@@ -140,7 +140,7 @@ describe 'User search for item' do
     login_as(user)
     visit root_path
     
-    fill_in 'Buscar Cardápio', with: "Casa"
+    fill_in 'query', with: "Casa"
     click_on 'Buscar'
     click_on 'Editar Prato'
 
@@ -159,7 +159,7 @@ describe 'User search for item' do
     login_as(user)
     visit root_path
     
-    fill_in 'Buscar Cardápio', with: "Casa"
+    fill_in 'query', with: "Casa"
     click_on 'Buscar'
     click_on 'Editar Bebida'
 
@@ -179,7 +179,7 @@ describe 'User search for item' do
     login_as(user)
     visit root_path
     
-    fill_in 'Buscar Cardápio', with: "Casa"
+    fill_in 'query', with: "Casa"
     click_on 'Buscar'
     click_on 'Bife a cavalo'
 
@@ -194,7 +194,7 @@ describe 'User search for item' do
     login_as(user)
     visit root_path
     
-    fill_in 'Buscar Cardápio', with: "Casa"
+    fill_in 'query', with: "Casa"
     click_on 'Buscar'
     click_on 'Cerveja'
 

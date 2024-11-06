@@ -8,8 +8,7 @@
       <div class="flex items-center space-x-4"> 
         <% if has_restaurant? %>
             <%= form_with(url: restaurant_items_search_path(user_restaurant), method: :get, html: { class: "flex items-center space-x-2 p-2", id: "search_form" }) do |f| %>
-            <%= f.label :query, 'Buscar Cardápio' %> 
-            <%= f.text_field :query, class: "p-2 rounded-md text-black" %>      
+            <%= f.text_field :query, placeholder: "Pesquise por pratos e bebidas", class: "p-2 rounded-md text-black" %>      
             <%= f.submit 'Buscar', class: "py-2 border px-4 text-white font-semibold rounded-md cursor-pointer hover:bg-blue-900" %>      
             <% end %>
 

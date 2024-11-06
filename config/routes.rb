@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :tags, only: [:index, :new, :create, :edit, :update]
     resources :dishes 
     resources :beverages 
+    resources :menus, only: [:new, :create]
     resources :items, only: [] do
       resources :options, controller: 'item_options', only: [:new, :create, :edit, :update]
       resources :option_historicals, only: [:index]

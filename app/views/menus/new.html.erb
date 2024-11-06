@@ -1,0 +1,64 @@
+<div class="max-w-lg mt-12 mb-6 px-4">
+  <div class="w-full flex items-center justify-start mb-6">
+      <%= link_to root_path, class: "flex items-center" do %>
+        <%= image_tag 'left_arrow.png'%>
+        <h1 class="ml-3 text-3xl font-bold text-gray-800">Cadastrar novo cardápio</h1>
+      <% end %>
+  </div>
+  
+  <%= form_with model: [@restaurant, @menu], class: "space-y-6" do |f| %>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+
+      <div class="col-span-2">
+        <%= f.label :name, class: "block text-sm font-medium text-gray-700" %>
+        <%= f.text_field :name, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+        <% if @menu.errors[:name].any? %> 
+          <span class="text-red-500 text-sm"><%= Menu.human_attribute_name(:name) %> <%= @menu.errors[:name].first %></span>
+        <% end %>
+      </div>
+
+      <div class="col-span-2">
+        <%= f.label :item_ids, Dish.model_name.human(count: 2), class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <% if @dishes.present? %>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <%= f.collection_check_boxes(:item_ids, @dishes, :id, :name) do |dish| %>
+              <div class="p-4 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 bg-white">
+                <%= image_tag dish.object.image.attached? ? dish.object.image : 'sem-imagem.jpg', alt: dish.object.name, class: "w-full w-24 h-24 object-cover rounded-md mb-4" %>
+                
+                <div class="flex items-center justify-between">
+                  <%= dish.label(class: "text-lg font-medium text-gray-800") %>
+                  <%= dish.check_box(class: "h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded") %>
+                </div>
+              </div>
+          <% end %>
+          </div>
+        <% else %>
+            <span>Nenhum prato cadastrado.</span>
+        <% end %>
+      </div>
+
+      <div class="col-span-2">
+        <%= f.label :item_ids, Beverage.model_name.human(count: 2), class: "block text-sm font-medium text-gray-700 mb-2" %>
+        <% if @beverages.present? %>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <%= f.collection_check_boxes(:item_ids, @beverages, :id, :name) do |beverage| %>
+              <div class="p-4 border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 bg-white">
+                <%= image_tag beverage.object.image.attached? ? beverage.object.image : 'sem-imagem.jpg', alt: beverage.object.name, class: "w-full w-24 h-24 object-cover rounded-md mb-4" %>
+                
+                <div class="flex items-center justify-between">
+                  <%= beverage.label(class: "text-lg font-medium text-gray-800") %>
+                  <%= beverage.check_box(class: "h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded") %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+            <span>Nenhuma bebida cadastrada.</span>
+        <% end %>
+      </div>
+   
+    <div class="mt-6">
+      <%= f.submit 'Cadastrar cardápio',  class: 'dark:bg-gray-700 py-2 w-full border border-transparent rounded-md shadow-lg text-lg font-medium text-white hover:dark:bg-gray-800 cursor-pointer focus:outline-none focus:ring-2 transition duration-200 focus:ring-offset-2 focus:ring-blue-500' %>
+    </div>
+  <% end %>
+</div>

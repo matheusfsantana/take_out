@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   
   def index
-    @menus = Menu.where(restaurant_id: params[:restaurant_id])
+    @restaurant = user_restaurant
+    @menus = Menu.where(restaurant: @restaurant)
   end
 end

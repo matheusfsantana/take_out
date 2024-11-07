@@ -1,7 +1,9 @@
 pt-BR:
   activerecord:
     models:
-      item: Cardápio
+      item: 
+        one: Item
+        other: Itens
     attributes:
       item:
         name: Nome

@@ -4,8 +4,8 @@ class Item < ApplicationRecord
   has_many :option_historical, through: :item_options
   has_many :item_tags, dependent: :destroy
   has_many :tags, through: :item_tags
-  has_many :menu_item
-  has_many :menu, through: :menu_items
+  has_many :menu_items
+  has_many :menus, through: :menu_items
   has_one_attached :image
   validates :name, :description, presence: true
   validate :calories_must_be_positive, :image_format_need_to_be_valid

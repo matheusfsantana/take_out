@@ -1,6 +1,6 @@
   <div class="flex items-center justify-between mb-6">
     <h1 class="text-3xl font-bold text-gray-800">Bebidas cadastradas</h1>
-    <%= link_to 'Cadastrar nova bebida', new_restaurant_beverage_path(user_restaurant),  class: 'dark:bg-gray-700 py-2 px-4 border border-transparent rounded-md shadow-lg text-lg font-medium text-white hover:dark:bg-gray-800 cursor-pointer focus:outline-none focus:ring-2 transition duration-200 focus:ring-offset-2 focus:ring-blue-500' %>
+    <%= link_to 'Cadastrar nova bebida', new_beverage_path,  class: 'dark:bg-gray-700 py-2 px-4 border border-transparent rounded-md shadow-lg text-lg font-medium text-white hover:dark:bg-gray-800 cursor-pointer focus:outline-none focus:ring-2 transition duration-200 focus:ring-offset-2 focus:ring-blue-500' %>
   </div>
 
   <div class="flex flex-wrap gap-6">
@@ -23,7 +23,7 @@
                 <%= image_tag "sem-imagem.jpg", class: "w-32 h-32 object-cover rounded-lg mr-6" %>
             <% end %>
             <div>
-              <%= link_to restaurant_beverage_path(user_restaurant, beverage) do %>
+              <%= link_to beverage_path(beverage) do %>
                 <h2 class="text-2xl font-bold text-indigo-700 hover:text-indigo-900 mb-2"><%= beverage.name %></h2>
               <% end %>
               <p class="text-gray-700 text-lg mb-2"><%= beverage.description %></p>

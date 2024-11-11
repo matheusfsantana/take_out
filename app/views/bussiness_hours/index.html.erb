@@ -22,7 +22,7 @@
             <%= bh.is_open ? "Sim" : "Não" %>
           </td>
           <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-            <%= link_to "Editar", edit_restaurant_bussiness_hour_path(@restaurant, bh.id), class: "text-indigo-600 hover:text-indigo-900" %>
+            <%= link_to "Editar", edit_bussiness_hour_path(bh.id), class: "text-indigo-600 hover:text-indigo-900" %>
           </td>
         </tr>
       <% end %>

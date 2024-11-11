@@ -12,7 +12,7 @@ describe 'User register beverage' do
     click_on 'Bebidas'
     click_on 'Cadastrar nova bebida'
 
-    expect(current_path).to eq new_restaurant_beverage_path(restaurant)
+    expect(current_path).to eq new_beverage_path
     expect(page).to have_field 'Nome'
     expect(page).to have_field 'Descrição'
     expect(page).to have_field 'Calorias'
@@ -38,7 +38,7 @@ describe 'User register beverage' do
     click_on 'Cadastrar bebida'
 
     expect(page).to have_content 'Nova bebida cadastrada com sucesso.'
-    expect(current_path).to eq restaurant_beverages_path(restaurant)
+    expect(current_path).to eq beverages_path
     expect(Beverage.find(1).image).to be_attached
   end
   it 'and should fail when mandatory fields are empty' do

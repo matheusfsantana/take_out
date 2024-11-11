@@ -7,7 +7,7 @@
 
 
 <div class="w-96" >
-  <%= form_with(model: @option, url: restaurant_item_option_path(@restaurant, @item)) do |f| %>
+  <%= form_with(model: @option, url: item_option_path(@item)) do |f| %>
     <div class="mb-4">
       <%= f.label :description, class: "block text-sm font-medium text-gray-700" %>
       <%= f.text_field :description, class: "mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50" %>

@@ -13,7 +13,7 @@ describe 'User update dish' do
     click_on 'Pratos'
     click_on 'teste'
 
-    expect(page).to have_link 'Editar Prato', href: edit_restaurant_dish_path(restaurant, dish)
+    expect(page).to have_link 'Editar Prato', href: edit_dish_path(dish)
   end
   it 'and should see all fields' do
     restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: '34.651.791/0001-31',
@@ -52,7 +52,7 @@ describe 'User update dish' do
     ItemTag.create!(item: dish, tag: tag_2)
     
     login_as(user)
-    visit edit_restaurant_dish_path(restaurant, dish)
+    visit edit_dish_path(dish)
 
     fill_in 'Nome', with: 'Feijoada'
     fill_in 'Descrição', with: 'Feijoada da Dona Maria'
@@ -61,7 +61,7 @@ describe 'User update dish' do
     attach_file "Imagem", Rails.root.join("spec/fixtures/files/test_image.png")
     click_on 'Atualizar prato'
 
-    expect(current_path).to eq restaurant_dish_path(restaurant, dish)
+    expect(current_path).to eq dish_path(dish)
     expect(page).to have_content 'Prato atualizado com sucesso.'
     expect(page).to have_content 'Feijoada'
     expect(page).to have_content 'Feijoada da Dona Maria'
@@ -84,7 +84,7 @@ describe 'User update dish' do
 
     login_as(user)
     visit root_path
-    visit edit_restaurant_dish_path(restaurant, dish)
+    visit edit_dish_path(dish)
 
     fill_in 'Nome', with: ''
     fill_in 'Descrição', with: ''
@@ -104,7 +104,7 @@ describe 'User update dish' do
 
 
     login_as(user)
-    visit edit_restaurant_dish_path(restaurant, dish)
+    visit edit_dish_path(dish)
 
     fill_in 'Nome', with: 'Feijoada'
     fill_in 'Descrição', with: 'Feijão preto, Carne seca, Costelinha, Linguiça calabresa, Bacon, Paio, Lombo salgado, Pernil salgado, Rabo, Pé'
@@ -122,7 +122,7 @@ describe 'User update dish' do
 
 
     login_as(user)
-    visit edit_restaurant_dish_path(restaurant, dish)
+    visit edit_dish_path(dish)
 
     fill_in 'Nome', with: 'Feijoada'
     fill_in 'Descrição', with: 'Feijão preto, Carne seca, Costelinha, Linguiça calabresa, Bacon, Paio, Lombo salgado, Pernil salgado, Rabo, Pé'

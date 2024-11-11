@@ -14,7 +14,7 @@ describe 'User register a menu to restaurant' do
     visit root_path
     click_on 'Cadastrar novo cardápio'
 
-    expect(current_path).to eq new_restaurant_menu_path(restaurant)
+    expect(current_path).to eq new_menu_path
     
     expect(page).to have_field 'Nome'
     expect(page).to have_content 'Pratos'

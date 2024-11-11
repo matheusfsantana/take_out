@@ -1,12 +1,12 @@
 <div class="max-w-lg mt-12 mb-6 px-4">
    <div class="w-full flex items-center justify-start mb-6">
-      <%= link_to restaurant_dishes_path, class: "flex items-center" do %>
+      <%= link_to dishes_path, class: "flex items-center" do %>
         <%= image_tag 'left_arrow.png'%>
       <% end %>
       <h1 class="ml-3 text-3xl font-bold text-gray-800">Atualizar bebida</h1>
   </div>
 
-  <%= form_with model: [@restaurant, @beverage], class: "space-y-6" do |f| %>
+  <%= form_with model: @beverage, class: "space-y-6" do |f| %>
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
 
 

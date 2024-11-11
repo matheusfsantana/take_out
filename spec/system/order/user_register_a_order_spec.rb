@@ -20,7 +20,7 @@ describe 'User register a order' do
     click_on 'Lanches'
     click_on 'Registrar pedido'
 
-    expect(current_path).to eq new_restaurant_menu_order_path(restaurant, menu)
+    expect(current_path).to eq new_menu_order_path(menu)
     expect(page).to have_select 'Cliente'
     expect(page).to have_select 'Item'
     expect(page).to have_field 'Observação'
@@ -42,7 +42,7 @@ describe 'User register a order' do
     Customer.create!(name: 'Joãozinho', email: 'cliente@gmail.com', phone_number: '81987654321', cpf: '61354764080', restaurant: restaurant)
 
     login_as(user)
-    visit new_restaurant_menu_order_path(restaurant, menu)
+    visit new_menu_order_path(menu)
     select 'Joãozinho', from: 'Cliente'
     select 'Batata pequena - R$ 10.00', from: 'Item'
     fill_in 'Observação', with: 'colocar ketchup'
@@ -78,7 +78,7 @@ describe 'User register a order' do
     Customer.create!(name: 'Joãozinho', email: 'cliente@gmail.com', phone_number: '81987654321', cpf: CPF.generate, restaurant: restaurant)
 
     login_as(user)
-    visit new_restaurant_menu_order_path(restaurant, menu)
+    visit new_menu_order_path(menu)
     select 'Joãozinho', from: 'Cliente'
     select 'Batata pequena - R$ 10.00', from: 'Item'
     fill_in 'Observação', with: 'colocar ketchup'
@@ -104,7 +104,7 @@ describe 'User register a order' do
     Customer.create!(name: 'Joãozinho', email: 'cliente@gmail.com', phone_number: '81987654321', cpf: CPF.generate, restaurant: restaurant)
 
     login_as(user)
-    visit new_restaurant_menu_order_path(restaurant, menu)
+    visit new_menu_order_path(menu)
     select 'Batata pequena - R$ 10.00', from: 'Item'
     fill_in 'Observação', with: 'colocar ketchup'
     click_on 'Registrar pedido'
@@ -128,7 +128,7 @@ describe 'User register a order' do
     Customer.create!(name: 'Joãozinho', email: 'cliente@gmail.com', phone_number: '81987654321', cpf: CPF.generate, restaurant: restaurant)
 
     login_as(user)
-    visit new_restaurant_menu_order_path(restaurant, menu)
+    visit new_menu_order_path(menu)
     select 'Joãozinho', from: 'Cliente'
     click_on 'Registrar pedido'
 

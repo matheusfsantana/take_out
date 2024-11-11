@@ -1,19 +1,14 @@
 class BussinessHoursController < ApplicationController 
   def index 
-    @restaurant = user_restaurant
-    @bussiness_hours = BussinessHour.where(restaurant: @restaurant)
+    @bussiness_hours = BussinessHour.where(restaurant: user_restaurant)
   end
   def edit 
-    @restaurant = user_restaurant
-    @bussiness_hour = BussinessHour.find(params[:id]) 
+    @bussiness_hour = BussinessHour.find_by(params[:id], restaurant: user_restaurant) 
   end
 
   def update
-    @restaurant = user_restaurant
-    @bussiness_hour = BussinessHour.find(params[:id])
-
-    return redirect_to restaurant_bussiness_hours_path(@restaurant), notice: 'Horário atualizado com sucesso' if @bussiness_hour.update(bussiness_hour_params)
-    
+    @bussiness_hour = BussinessHour.find_by(params[:id], restaurant: user_restaurant)
+    return redirect_to bussiness_hours_path, notice: 'Horário atualizado com sucesso' if @bussiness_hour.update(bussiness_hour_params)
     render :edit, status: :unprocessable_entity
   end
 

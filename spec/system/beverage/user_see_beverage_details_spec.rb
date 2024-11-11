@@ -8,7 +8,7 @@ describe 'User visit beverage details page' do
 
 
     login_as(user)
-    visit restaurant_beverage_path(restaurant, 1)
+    visit beverage_path(1)
 
     expect(current_path).to eq root_path
   end
@@ -23,7 +23,7 @@ describe 'User visit beverage details page' do
     click_on 'Bebidas'
     click_on 'Cerveja'
     
-    expect(current_path).to eq restaurant_beverage_path(restaurant, beverage)
+    expect(current_path).to eq beverage_path(beverage)
     expect(page).to have_content 'Cerveja'
     expect(page).to have_content 'Cerveja artesanal da casa'
     expect(page).to have_content '300'

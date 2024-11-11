@@ -19,7 +19,7 @@ describe 'User see menu items' do
     visit root_path
     click_on 'Lanches'
 
-    expect(current_path).to eq restaurant_menu_path(restaurant, menu)
+    expect(current_path).to eq menu_path(menu)
     expect(page).to have_content 'Pratos'
     expect(page).to have_content('Batata frita')
     expect(page).to have_content('Batata pequena')
@@ -52,7 +52,7 @@ describe 'User see menu items' do
     visit root_path
     click_on 'Lanches'
 
-    expect(current_path).to eq restaurant_menu_path(restaurant, menu)
+    expect(current_path).to eq menu_path(menu)
     expect(page).to have_content('Batata frita')
     expect(page).to have_content('Batata pequena')
     expect(page).to have_content('R$ 10,00')

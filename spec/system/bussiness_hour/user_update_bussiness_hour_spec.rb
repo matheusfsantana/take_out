@@ -38,7 +38,7 @@ describe 'User register the bussiness hour of your restaurant' do
     click_on 'Salvar Horário'
 
     expect(page).to have_content 'Horário atualizado com sucesso'
-    expect(current_path).to eq restaurant_bussiness_hours_path(restaurant)
+    expect(current_path).to eq bussiness_hours_path
     first_row = first('table tbody tr')
     expect(first_row).to have_content('Segunda')
     expect(first_row).to have_content('09:00')
@@ -62,7 +62,7 @@ describe 'User register the bussiness hour of your restaurant' do
     click_on 'Salvar Horário'
 
     expect(page).to have_content 'Horário atualizado com sucesso'
-    expect(current_path).to eq restaurant_bussiness_hours_path(restaurant)
+    expect(current_path).to eq bussiness_hours_path
     first_row = first('table tbody tr')
     expect(first_row).to have_content('Segunda')
     expect(first_row).to have_content('Fechado')

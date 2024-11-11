@@ -1,45 +1,41 @@
 class ItemOptionsController < ApplicationController
   def new
-    @restaurant = Restaurant.find_by(id: params[:restaurant_id])
-    @item = Item.find_by(id: params[:item_id], restaurant: @restaurant)
+    @item = Item.find_by(id: params[:item_id], restaurant: user_restaurant)
     @option = ItemOption.new
-    @path = @item.type == 'Dish' ? restaurant_dish_path(@restaurant, @item.id) : restaurant_beverage_path(@restaurant, @item.id)
+    @path = @item.type == 'Dish' ? dish_path(@item.id) : beverage_path(@item.id)
   end
 
   def create
-    @restaurant = Restaurant.find_by(id: params[:restaurant_id])
-    @item = Item.find_by(id: params[:item_id], restaurant_id: @restaurant)
+    @item = Item.find_by(id: params[:item_id], restaurant_id: user_restaurant)
     @option = ItemOption.new(item_options_params)
     @option.item = @item
 
     if @option.save 
       flash[:notice] = 'Porção cadastrada com sucesso.'
-      return redirect_to restaurant_dish_path(@restaurant, @item) if @item.type == 'Dish'
-      return redirect_to restaurant_beverage_path(@restaurant, @item)
+      return redirect_to dish_path(@item) if @item.type == 'Dish'
+      return redirect_to beverage_path(@item)
     end
-    @path = @item.type == 'Dish' ? restaurant_dish_path(@restaurant, @item.id) : restaurant_beverage_path(@restaurant, @item.id)
+    @path = @item.type == 'Dish' ? dish_path(@item) : beverage_path(@item)
     flash.now[:alert] = "Ocorreu um erro ao cadastrar porção"
     render :new, status: :unprocessable_entity
   end
 
   def edit
-    @restaurant = Restaurant.find_by(id: params[:restaurant_id])
-    @item = Item.find_by(id: params[:item_id], restaurant: @restaurant)
+    @item = Item.find_by(id: params[:item_id], restaurant: user_restaurant)
     return redirect_to root_path if @item.nil?
     @option = ItemOption.find_by(id: params[:id], item: @item)
-    @path = @item.type == 'Dish' ? restaurant_dish_path(@restaurant, @item.id) : restaurant_beverage_path(@restaurant, @item.id)
+    @path = @item.type == 'Dish' ? dish_path(@item.id) : beverage_path(@item.id)
   end
 
   def update
-    @restaurant = Restaurant.find_by(id: params[:restaurant_id])
-    @item = Item.find_by(id: params[:item_id], restaurant: @restaurant)
+    @item = Item.find_by(id: params[:item_id], restaurant: user_restaurant)
     @option = ItemOption.find_by(id: params[:id], item: @item)
     if @option.update(item_options_params)
       flash[:notice] = 'Porção atualizada com sucesso.'
-      return redirect_to restaurant_dish_path(@restaurant, @item) if @item.type == 'Dish'
-      return redirect_to restaurant_beverage_path(@restaurant, @item)
+      return redirect_to dish_path(@item) if @item.type == 'Dish'
+      return redirect_to beverage_path(@item)
     end
-    @path = @item.type == 'Dish' ? restaurant_dish_path(@restaurant, @item.id) : restaurant_beverage_path(@restaurant, @item.id)
+    @path = @item.type == 'Dish' ? dish_path(@item.id) : beverage_path(@item.id)
     flash.now[:alert] = "Ocorreu um erro ao atualizar porção"
     render :edit, status: :unprocessable_entity
   end

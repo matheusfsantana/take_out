@@ -13,7 +13,7 @@ describe 'User register dish for your restaurant' do
     click_on 'Pratos'
     click_on 'Cadastrar novo prato'
 
-    expect(current_path).to eq new_restaurant_dish_path(restaurant)
+    expect(current_path).to eq new_dish_path
     expect(page).to have_field 'Nome'
     expect(page).to have_field 'Descrição'
     expect(page).to have_field 'Calorias'
@@ -30,7 +30,7 @@ describe 'User register dish for your restaurant' do
     Tag.create!(name: 'Vegano', restaurant: restaurant)
 
     login_as(user)
-    visit new_restaurant_dish_path(restaurant)
+    visit new_dish_path
 
     fill_in 'Nome', with: 'Feijoada'
     fill_in 'Descrição', with: 'Feijão preto, Carne seca, Costelinha, Linguiça calabresa, Bacon, Paio, Lombo salgado, Pernil salgado, Rabo, Pé'
@@ -40,7 +40,7 @@ describe 'User register dish for your restaurant' do
     attach_file "Imagem", Rails.root.join("spec/fixtures/files/test_image.png")
     click_on 'Cadastrar prato'
 
-    expect(current_path).to eq restaurant_dishes_path(restaurant)
+    expect(current_path).to eq dishes_path
     expect(Dish.find(1).image).to be_attached
     expect(page).to have_content 'Novo prato cadastrado com sucesso.'
   end
@@ -52,7 +52,7 @@ describe 'User register dish for your restaurant' do
     Tag.create!(name: 'Vegano', restaurant: restaurant)
 
     login_as(user)
-    visit new_restaurant_dish_path(restaurant)
+    visit new_dish_path
 
     fill_in 'Nome', with: ''
     fill_in 'Descrição', with: ''
@@ -71,7 +71,7 @@ describe 'User register dish for your restaurant' do
 
 
     login_as(user)
-    visit new_restaurant_dish_path(restaurant)
+    visit new_dish_path
 
     fill_in 'Nome', with: 'Feijoada'
     fill_in 'Descrição', with: 'Feijão preto, Carne seca, Costelinha, Linguiça calabresa, Bacon, Paio, Lombo salgado, Pernil salgado, Rabo, Pé'
@@ -87,7 +87,7 @@ describe 'User register dish for your restaurant' do
 
 
     login_as(user)
-    visit new_restaurant_dish_path(restaurant)
+    visit new_dish_path
     click_on 'Pratos'
     click_on 'Cadastrar novo prato'
 

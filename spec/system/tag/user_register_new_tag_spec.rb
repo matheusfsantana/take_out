@@ -6,7 +6,7 @@ describe 'User register a new tag' do
                                     full_address:'Rua da Hot, 721 - RJ',email:'contato@hotlanches.com', phone_number: '81987654321')
     User.create!(restaurant: restaurant, email: 'teste@gmail.com', password: 'password1234', cpf: '00085364061', name: 'teste', last_name: 'da silva')
 
-    visit new_restaurant_tag_path(restaurant)
+    visit new_tag_path
 
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
     expect(current_path).to eq new_user_session_path
@@ -24,7 +24,7 @@ describe 'User register a new tag' do
     click_on 'Cadastrar novo marcador'
 
     expect(page).to have_field 'Marcador'
-    expect(current_path).to eq new_restaurant_tag_path(restaurant)
+    expect(current_path).to eq new_tag_path
   end
 
   it 'and should register successfully' do
@@ -42,7 +42,7 @@ describe 'User register a new tag' do
 
     expect(page).to have_content 'Marcador cadastrado com sucesso'
     expect(page).to have_content 'Apimentado'
-    expect(current_path).to eq restaurant_tags_path(restaurant)
+    expect(current_path).to eq tags_path
   end
 
   it 'and should display an error message when name field is empty' do

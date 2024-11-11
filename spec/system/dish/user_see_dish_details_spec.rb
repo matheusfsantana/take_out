@@ -8,7 +8,7 @@ describe 'User visit dish details page' do
 
 
     login_as(user)
-    visit restaurant_dish_path(restaurant, 1)
+    visit dish_path(1)
 
     expect(current_path).to eq root_path
   end
@@ -28,7 +28,7 @@ describe 'User visit dish details page' do
     click_on 'Pratos'
     click_on 'teste'
     
-    expect(current_path).to eq restaurant_dish_path(restaurant, dish)
+    expect(current_path).to eq dish_path(dish)
     expect(page).to have_content 'teste'
     expect(page).to have_content 'testando'
     expect(page).to have_content '10'

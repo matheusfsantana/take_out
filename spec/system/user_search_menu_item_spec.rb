@@ -45,7 +45,7 @@ describe 'User search for item' do
     within 'nav' do
       expect(page).to have_selector('form#search_form') 
     end
-    expect(current_path).to eq restaurant_dishes_path(restaurant)
+    expect(current_path).to eq dishes_path
   end
   it "and should see the search form on the RESTAURANT_BEVERAGES_PATH" do
     restaurant = Restaurant.create!(corporate_name: 'hot lanches xyz', brand_name: 'hot lanches', cnpj: '84685592000112',
@@ -59,7 +59,7 @@ describe 'User search for item' do
     within 'nav' do
       expect(page).to have_selector('form#search_form') 
     end
-    expect(current_path).to eq restaurant_beverages_path(restaurant)
+    expect(current_path).to eq beverages_path
   end
   it "and should see the search form on the RESTAURANT_BUSSINESS_HOURS_PATH" do
     restaurant = Restaurant.create!(corporate_name: 'hot lanches xyz', brand_name: 'hot lanches', cnpj: '84685592000112',
@@ -73,7 +73,7 @@ describe 'User search for item' do
     within 'nav' do
       expect(page).to have_selector('form#search_form') 
     end
-    expect(current_path).to eq restaurant_bussiness_hours_path(restaurant)
+    expect(current_path).to eq bussiness_hours_path
   end
   it "and should search successfull for dishes and beverages names" do
     restaurant = Restaurant.create!(corporate_name: 'hot lanches xyz', brand_name: 'hot lanches', cnpj: '84685592000112',
@@ -88,7 +88,7 @@ describe 'User search for item' do
     fill_in 'query', with: "Cer"
     click_on 'Buscar'
 
-    expect(current_path).to eq restaurant_items_search_path(restaurant)
+    expect(current_path).to eq items_search_path
     expect(page).to have_content 'Resultados da busca por: "Cer"'
     expect(page).to have_content 'Cereja'
     expect(page).to have_content 'Cerveja'
@@ -106,7 +106,7 @@ describe 'User search for item' do
     fill_in 'query', with: "Casa"
     click_on 'Buscar'
 
-    expect(current_path).to eq restaurant_items_search_path(restaurant)
+    expect(current_path).to eq items_search_path
     expect(page).to have_content 'Resultados da busca por: "Casa"'
     expect(page).to have_content 'Bife a cavalo'
     expect(page).to have_content 'Prato da casa'
@@ -126,7 +126,7 @@ describe 'User search for item' do
     fill_in 'query', with: "teste pesquisa"
     click_on 'Buscar'
 
-    expect(current_path).to eq restaurant_items_search_path(restaurant)
+    expect(current_path).to eq items_search_path
     expect(page).to have_content 'Resultados da busca por: "teste pesquisa"'
     expect(page).to have_content 'Nenhum prato encontrado'
     expect(page).to have_content 'Nenhuma bebida encontrada'
@@ -144,7 +144,7 @@ describe 'User search for item' do
     click_on 'Buscar'
     click_on 'Editar Prato'
 
-    expect(current_path).to eq edit_restaurant_dish_path(restaurant, dish)
+    expect(current_path).to eq edit_dish_path(dish)
     expect(page).to have_field 'Nome', with: 'Bife a cavalo'
     expect(page).to have_field 'Descrição', with: 'Prato da casa'
     expect(page).to have_field 'Calorias', with: '10'
@@ -163,7 +163,7 @@ describe 'User search for item' do
     click_on 'Buscar'
     click_on 'Editar Bebida'
 
-    expect(current_path).to eq edit_restaurant_beverage_path(restaurant, beverage)
+    expect(current_path).to eq edit_beverage_path(beverage)
     expect(page).to have_field 'Nome', with: 'Cerveja'
     expect(page).to have_field 'Descrição', with: 'Cerveja artesanal da casa'
     expect(page).to have_field 'Calorias', with: '300'
@@ -183,7 +183,7 @@ describe 'User search for item' do
     click_on 'Buscar'
     click_on 'Bife a cavalo'
 
-    expect(current_path).to eq restaurant_dish_path(restaurant, dish)
+    expect(current_path).to eq dish_path(dish)
   end
   it "and should search successfull for dishes and beverages descriptions and access to the BEVERAGE DETAILS PAGE" do
     restaurant = Restaurant.create!(corporate_name: 'hot lanches xyz', brand_name: 'hot lanches', cnpj: '84685592000112',
@@ -198,6 +198,6 @@ describe 'User search for item' do
     click_on 'Buscar'
     click_on 'Cerveja'
 
-    expect(current_path).to eq restaurant_beverage_path(restaurant, beverage)
+    expect(current_path).to eq beverage_path(beverage)
   end
 end

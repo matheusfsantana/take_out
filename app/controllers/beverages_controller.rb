@@ -5,21 +5,19 @@ class BeveragesController < ApplicationController
   end
 
   def new 
-    @restaurant = user_restaurant
     @beverage = Beverage.new
   end
 
   def create 
-    @restaurant = user_restaurant
     @beverage = Beverage.new(beverage_params)
-    @beverage.restaurant = @restaurant
+    @beverage.restaurant = user_restaurant
 
-    return redirect_to restaurant_beverages_path(@restaurant), notice: 'Nova bebida cadastrada com sucesso.' if @beverage.save
+    return redirect_to beverages_path, notice: 'Nova bebida cadastrada com sucesso.' if @beverage.save
     render :new, status: :unprocessable_entity
   end
 
   def show
-    @item = Item.find_by(id: params[:id], restaurant: user_restaurant )
+    @item = Item.find_by(id: params[:id], restaurant: user_restaurant)
     @beverage = @item
     return redirect_to root_path if @beverage.nil?
     @options = @beverage.item_options
@@ -27,21 +25,19 @@ class BeveragesController < ApplicationController
   end
 
   def edit
-    @restaurant = user_restaurant
     @beverage = Beverage.find_by(id: params[:id], restaurant: user_restaurant)
     redirect_to root_path if @beverage.nil?
   end
 
   def update
     @beverage = Beverage.find_by(id: params[:id], restaurant: user_restaurant)
-    return redirect_to restaurant_beverage_path(user_restaurant, @beverage), notice: 'Bebida atualizada com sucesso.' if @beverage.update(beverage_params)
-    @restaurant = user_restaurant
+    return redirect_to beverage_path(@beverage), notice: 'Bebida atualizada com sucesso.' if @beverage.update(beverage_params)
     render :edit, status: :unprocessable_entity
   end
 
   def destroy
-    @beverage = Beverage.find_by(id: params[:id])
-    redirect_to restaurant_beverages_path(user_restaurant), notice: "Bebida excluída com sucesso" if @beverage.destroy
+    @beverage = Beverage.find_by(id: params[:id], restaurant: user_restaurant)
+    redirect_to beverages_path, notice: "Bebida excluída com sucesso" if @beverage.destroy
   end
 
   def beverage_params

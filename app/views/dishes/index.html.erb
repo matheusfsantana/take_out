@@ -2,14 +2,14 @@
     <div class="flex items-center" >
       <h1 class="text-3xl font-bold text-gray-800">Pratos cadastrados</h1>
       <% if @tags.any? %>
-        <%= form_with(url: restaurant_dishes_path(user_restaurant), method: :get, html: { class: "flex items-center space-x-2 p-2", id: "filter_form" }) do |f| %>
+        <%= form_with(url: dishes_path, method: :get, html: { class: "flex items-center space-x-2 p-2", id: "filter_form" }) do |f| %>
                 <%= f.collection_select :filter_tag, @tags, :name, :name, { prompt: 'Filtre por marcadores', selected: params[:filter_tag] }, class: "w-60 p-2 rounded-md text-black" %>      
                 <%= f.submit 'Filtrar', name: nil, class: 'dark:bg-gray-700 py-2 px-4 border border-transparent rounded-md shadow-lg text-lg font-medium text-white hover:dark:bg-gray-800 cursor-pointer focus:outline-none focus:ring-2 transition duration-200 focus:ring-offset-2 focus:ring-blue-500' %>
         <% end %>
-        <%= link_to 'Limpar', restaurant_dishes_path(user_restaurant) %>
+        <%= link_to 'Limpar', dishes_path %>
       <% end %>
     </div>
-    <%= link_to 'Cadastrar novo prato', new_restaurant_dish_path(user_restaurant),  class: 'dark:bg-gray-700 py-2 px-4 border border-transparent rounded-md shadow-lg text-lg font-medium text-white hover:dark:bg-gray-800 cursor-pointer focus:outline-none focus:ring-2 transition duration-200 focus:ring-offset-2 focus:ring-blue-500' %>
+    <%= link_to 'Cadastrar novo prato', new_dish_path,  class: 'dark:bg-gray-700 py-2 px-4 border border-transparent rounded-md shadow-lg text-lg font-medium text-white hover:dark:bg-gray-800 cursor-pointer focus:outline-none focus:ring-2 transition duration-200 focus:ring-offset-2 focus:ring-blue-500' %>
   </div>
 
   <div class="flex flex-wrap gap-6">
@@ -32,7 +32,7 @@
                 <%= image_tag "sem-imagem.jpg", class: "w-32 h-32 object-cover rounded-lg mr-6" %>
             <% end %>
             <div>
-               <%= link_to restaurant_dish_path(user_restaurant, dish) do %>
+               <%= link_to dish_path(dish) do %>
                 <h2 class="text-2xl font-bold text-indigo-700 hover:text-indigo-900 mb-2"><%= dish.name %></h2>
               <% end %>
               <p class="text-gray-700 text-lg mb-2"><%= dish.description %></p>

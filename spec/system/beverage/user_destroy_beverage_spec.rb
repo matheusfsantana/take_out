@@ -27,7 +27,7 @@ describe 'User destroy beverage' do
     click_on 'Excluir Bebida'
 
     expect(Beverage.exists?(beverage.id)).to be_falsy
-    expect(current_path).to eq restaurant_beverages_path(restaurant)
+    expect(current_path).to eq beverages_path
     expect(page).to have_content 'Bebida excluída com sucesso'
   end
 end

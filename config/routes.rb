@@ -6,28 +6,28 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }  
   resources :employees, only: [:index, :new, :create]
-  resources :restaurants, only: [:new, :create] do
-    resources :tags, only: [:index, :new, :create, :edit, :update]
-    resources :dishes 
-    resources :beverages 
-    resources :menus, only: [:new, :create, :show] do
-      resources :orders, only: [:new, :create]
-    end
-    resources :customers, only: [:new, :create]
-    resources :items, only: [] do
-      resources :options, controller: 'item_options', only: [:new, :create, :edit, :update]
-      resources :option_historicals, only: [:index]
-    end
-    resources :bussiness_hours, only: [:index, :edit, :update]
-    
-    get 'items/search', to: 'items#search'
-    post 'update_item_status/:item_id', to: "items#update_status", as: 'update_item_status'
+  resources :restaurants, only: [:new, :create]
+  resources :tags, only: [:index, :new, :create, :edit, :update]
+  resources :dishes 
+  resources :beverages 
+  resources :bussiness_hours, only: [:index, :edit, :update]
+  resources :customers, only: [:new, :create]
+  resources :menus, only: [:new, :create, :show] do
+    resources :orders, only: [:new, :create]
+  end
+  resources :items, only: [] do
+    resources :options, controller: 'item_options', only: [:new, :create, :edit, :update]
+    resources :option_historicals, only: [:index]
   end
   resources :orders, only: [] do
-     member do
-       get 'confirm', to: 'orders#confirm_order'
-       post 'confirm', to: 'orders#confirm_order_status'
-     end
+    member do
+      get 'confirm', to: 'orders#confirm_order'
+      post 'confirm', to: 'orders#confirm_order_status'
+    end
   end
+  
+  get 'items/search', to: 'items#search'
+  post 'update_item_status/:item_id', to: "items#update_status", as: 'update_item_status'
+  
   root "home#index"
 end

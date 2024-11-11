@@ -3,7 +3,7 @@
     <h1>Atualizar horário</h1>
   </div>
 
-  <%= form_with model: [@restaurant, @bussiness_hour], class: "space-y-6" do |f| %>
+  <%= form_with model: @bussiness_hour, class: "space-y-6" do |f| %>
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
       <div class="col-span-2">
         <%= f.label :day_of_week, class: "block text-sm font-medium text-gray-700" %>

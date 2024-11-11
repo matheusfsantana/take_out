@@ -2,27 +2,24 @@ class MenusController < ApplicationController
   skip_before_action :redirect_if_is_employee
   
   def new
-    @restaurant = Restaurant.find(params[:restaurant_id])
     @menu = Menu.new
-    @dishes = Item.where(restaurant: @restaurant, type: 'Dish')
-    @beverages = Item.where(restaurant_id: @restaurant, type: 'Beverage')
+    @dishes = Item.where(restaurant: user_restaurant, type: 'Dish')
+    @beverages = Item.where(restaurant: user_restaurant, type: 'Beverage')
   end
 
   def create
-    @restaurant = Restaurant.find(params[:restaurant_id])
     @menu = Menu.new(menu_params)
-    @menu.restaurant = @restaurant
+    @menu.restaurant = user_restaurant
 
-    return redirect_to root_path(@restaurant), notice: 'Cardápio cadastrado com sucesso' if @menu.save 
-    @dishes = Item.where(restaurant: @restaurant, type: 'Dish')
-    @beverages = Item.where(restaurant_id: @restaurant, type: 'Beverage')
+    return redirect_to root_path, notice: 'Cardápio cadastrado com sucesso' if @menu.save 
+    @dishes = Item.where(restaurant: user_restaurant, type: 'Dish')
+    @beverages = Item.where(restaurant: user_restaurant, type: 'Beverage')
     flash.now[:alert] = "Erro ao cadastrar cardápio"
     render :new, status: :unprocessable_entity
   end
 
   def show
-    @restaurant = Restaurant.find(params[:restaurant_id])
-    @menu = Menu.find_by(id: params[:id], restaurant: @restaurant)
+    @menu = Menu.find_by(id: params[:id], restaurant: user_restaurant)
     @dishes = @menu.items.where(is_active: true, type: 'Dish')
     @beverages = @menu.items.where(is_active: true, type: 'Beverage')
     

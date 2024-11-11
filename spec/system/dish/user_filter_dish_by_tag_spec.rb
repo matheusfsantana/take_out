@@ -18,7 +18,7 @@ describe 'User filter dish by tag' do
     ItemTag.create!(item: second_dish, tag: second_user_tag)
 
     login_as(second_user)
-    visit restaurant_dishes_path(second_user_restaurant)
+    visit dishes_path
     select 'Apimentado', from: 'filter_tag'
     click_on 'Filtrar'
 
@@ -44,7 +44,7 @@ describe 'User filter dish by tag' do
 
    
     login_as(user)
-    visit restaurant_dishes_path(restaurant)
+    visit dishes_path
     select 'Apimentado', from: 'filter_tag'
     click_on 'Filtrar'
 
@@ -71,7 +71,7 @@ describe 'User filter dish by tag' do
 
    
     login_as(user)
-    visit restaurant_dishes_path(restaurant)
+    visit dishes_path
     select 'Apimentado', from: 'filter_tag'
     click_on 'Filtrar'
     click_on 'Limpar'

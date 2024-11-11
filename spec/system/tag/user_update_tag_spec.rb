@@ -8,7 +8,7 @@ describe 'User update an tag' do
 
     tag = Tag.create!(name: 'Apimentado', restaurant: restaurant)  
 
-    visit edit_restaurant_tag_path(restaurant, tag)
+    visit edit_tag_path(tag)
 
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
     expect(current_path).to eq new_user_session_path
@@ -26,7 +26,7 @@ describe 'User update an tag' do
     tag = Tag.create!(name: 'Apimentado', restaurant: first_restaurant)  
    
     login_as(second_user)
-    visit edit_restaurant_tag_path(first_restaurant, tag)
+    visit edit_tag_path(first_restaurant, tag)
 
     expect(current_path).to eq root_path
   end
@@ -43,7 +43,7 @@ describe 'User update an tag' do
     click_on 'Editar'
 
     expect(page).to have_field 'Marcador', with: 'Apimentado'
-    expect(current_path).to eq edit_restaurant_tag_path(restaurant, tag)
+    expect(current_path).to eq edit_tag_path(tag)
   end
 
   it 'and should update successfully' do
@@ -53,7 +53,7 @@ describe 'User update an tag' do
     tag = Tag.create!(name: 'Apimentado', restaurant: restaurant)  
 
     login_as(user)
-    visit edit_restaurant_tag_path(restaurant, tag)
+    visit edit_tag_path(tag)
     fill_in 'Marcador', with: 'Picante'
     click_on 'Atualizar marcador'
 
@@ -61,7 +61,7 @@ describe 'User update an tag' do
     expect(page).to have_content 'Marcador atualizado com sucesso'
     expect(page).to have_content 'Picante'
     expect(page).not_to have_content 'Apimentado'
-    expect(current_path).to eq restaurant_tags_path(restaurant)
+    expect(current_path).to eq tags_path
   end
 
   it 'and should display an error message when name field is empty' do
@@ -71,7 +71,7 @@ describe 'User update an tag' do
     tag = Tag.create!(name: 'Apimentado', restaurant: restaurant)  
 
     login_as(user)
-    visit edit_restaurant_tag_path(restaurant, tag)
+    visit edit_tag_path(tag)
     fill_in 'Marcador', with: ''
     click_on 'Atualizar marcador'
 

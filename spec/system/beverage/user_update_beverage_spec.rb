@@ -12,7 +12,7 @@ describe 'User update beverage' do
     click_on 'Bebidas'
     click_on 'Cerveja'
 
-    expect(page).to have_link 'Editar Bebida', href: edit_restaurant_beverage_path(restaurant, beverage)
+    expect(page).to have_link 'Editar Bebida', href: edit_beverage_path(beverage)
   end
   it 'and should see all fields' do
     restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: '34.651.791/0001-31',
@@ -49,7 +49,7 @@ describe 'User update beverage' do
     attach_file "Imagem", Rails.root.join("spec/fixtures/files/test_image.png")
     click_on 'Atualizar bebida'
 
-    expect(current_path).to eq restaurant_beverage_path(restaurant, beverage)
+    expect(current_path).to eq beverage_path(beverage)
     expect(page).to have_content 'Bebida atualizada com sucesso.'
     expect(page).to have_content 'Suco de laranja com limão'
     expect(page).to have_content 'Suco feito da polpa de laranja e de limão'

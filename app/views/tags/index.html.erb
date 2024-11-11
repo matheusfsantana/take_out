@@ -1,6 +1,6 @@
   <div class="flex items-center justify-between mb-6">
     <h1 class="text-3xl font-bold text-gray-800">Marcadores cadastrados</h1>
-    <%= link_to 'Cadastrar novo marcador', new_restaurant_tag_path(@restaurant),  class: 'dark:bg-gray-700 py-2 px-4 border border-transparent rounded-md shadow-lg text-lg font-medium text-white hover:dark:bg-gray-800 cursor-pointer focus:outline-none focus:ring-2 transition duration-200 focus:ring-offset-2 focus:ring-blue-500' %>
+    <%= link_to 'Cadastrar novo marcador', new_tag_path, class: 'dark:bg-gray-700 py-2 px-4 border border-transparent rounded-md shadow-lg text-lg font-medium text-white hover:dark:bg-gray-800 cursor-pointer focus:outline-none focus:ring-2 transition duration-200 focus:ring-offset-2 focus:ring-blue-500' %>
   </div>
 
 <div class="w-1/2 border border-gray-300 rounded-lg p-4 shadow-lg flex flex-col items-center mx-auto relative mt-4 mb-4">
@@ -17,7 +17,7 @@
             <tr>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= a.name %></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                <%= link_to "Editar", edit_restaurant_tag_path(@restaurant, a.id), class: "text-indigo-600 hover:text-indigo-900" %>
+                <%= link_to "Editar", edit_tag_path(a.id), class: "text-indigo-600 hover:text-indigo-900" %>
             </td>
             </tr>
         <% end %>

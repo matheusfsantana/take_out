@@ -28,7 +28,7 @@ describe 'User register a item item option from menu item details page' do
       click_on 'Bife a cavalo'
       click_on 'Cadastrar porção'
 
-      expect(current_path).to eq new_restaurant_item_option_path(restaurant, dish)
+      expect(current_path).to eq new_item_option_path(dish)
       expect(page).to have_content 'Bife a cavalo'
       expect(page).to have_field 'Descrição da porção'
       expect(page).to have_field 'Preço'
@@ -48,7 +48,7 @@ describe 'User register a item item option from menu item details page' do
       fill_in 'Preço', with: '30,00'
       click_on 'Cadastrar porção'
 
-      expect(current_path).to eq restaurant_dish_path(restaurant, dish)
+      expect(current_path).to eq dish_path(dish)
       expect(page).to have_content 'Porção cadastrada com sucesso.'
       expect(page).to have_content 'Individual'
       expect(page).to have_content 'R$ 30,00'
@@ -119,7 +119,7 @@ describe 'User register a item item option from menu item details page' do
       click_on 'Suco de laranja'
       click_on 'Cadastrar porção'
 
-      expect(current_path).to eq new_restaurant_item_option_path(restaurant, beverage)
+      expect(current_path).to eq new_item_option_path(beverage)
       expect(page).to have_content 'Suco de laranja'
       expect(page).to have_field 'Descrição da porção'
       expect(page).to have_field 'Preço'
@@ -139,7 +139,7 @@ describe 'User register a item item option from menu item details page' do
       fill_in 'Preço', with: '19,00'
       click_on 'Cadastrar porção'
 
-      expect(current_path).to eq restaurant_beverage_path(restaurant, beverage)
+      expect(current_path).to eq beverage_path(beverage)
       expect(page).to have_content 'Porção cadastrada com sucesso.'
       expect(page).to have_content 'Jarra de 1L'
       expect(page).to have_content 'R$ 19,00'

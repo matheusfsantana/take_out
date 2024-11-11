@@ -5,7 +5,7 @@
         <% end %>
         <h1 class="ml-3 text-3xl font-bold text-gray-800"><%= Menu.model_name.human%> - <%= @menu.name %></h1>
     </div>
-    <%= link_to 'Registrar pedido', new_restaurant_menu_order_path(@menu, @restaurant) %>
+    <%= link_to 'Registrar pedido', new_menu_order_path(@menu) %>
 </div>
 
 <% if @dishes.blank? && @beverages.blank? %>

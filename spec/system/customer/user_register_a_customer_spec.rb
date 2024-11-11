@@ -17,7 +17,7 @@ describe 'User register a customer' do
     click_on 'Registrar pedido'
     click_on 'Cadastrar cliente'
 
-    expect(current_path).to eq new_restaurant_customer_path(restaurant)
+    expect(current_path).to eq new_customer_path
     expect(page).to have_field 'Nome'
     expect(page).to have_field 'Telefone'
     expect(page).to have_field 'E-mail'
@@ -43,7 +43,7 @@ describe 'User register a customer' do
     click_on 'Cadastrar cliente'
 
     expect(page).to have_content 'Cliente cadastrado com sucesso'
-    expect(current_path).to eq new_restaurant_menu_order_path(restaurant, menu) # previous path
+    expect(current_path).to eq new_menu_order_path(menu) # previous path
   end
 
   it 'and should display an error message when fields are empty' do
@@ -57,7 +57,7 @@ describe 'User register a customer' do
     MenuItem.create!(menu: menu, item: first_dish)
 
     login_as(user)
-    visit new_restaurant_customer_path(restaurant)
+    visit new_customer_path
     fill_in 'Nome', with: ''
     fill_in 'E-mail', with: ''
     fill_in 'Telefone', with: ''
@@ -78,7 +78,7 @@ describe 'User register a customer' do
     MenuItem.create!(menu: menu, item: first_dish)
 
     login_as(user)
-    visit new_restaurant_customer_path(restaurant)
+    visit new_customer_path
     fill_in 'Nome', with: 'Fulano'
     fill_in 'E-mail', with: ''
     fill_in 'Telefone', with: ''
@@ -98,7 +98,7 @@ describe 'User register a customer' do
     MenuItem.create!(menu: menu, item: first_dish)
 
     login_as(user)
-    visit new_restaurant_customer_path(restaurant)
+    visit new_customer_path
     fill_in 'Nome', with: 'Fulano'
     fill_in 'E-mail', with: 'fulano@email.com'
     fill_in 'CPF', with: '123'

@@ -14,9 +14,9 @@
             <%= image_tag "sem-imagem.jpg", class: "w-32 h-32 object-cover rounded-lg mr-6" %>
         <% end %>
         <div>
-            <h2 class="text-2xl font-bold text-indigo-700 hover:text-indigo-900 mb-2"><%= link_to dish.name, restaurant_dish_path(user_restaurant, dish) %></h2>
+            <h2 class="text-2xl font-bold text-indigo-700 hover:text-indigo-900 mb-2"><%= link_to dish.name, dish_path(dish) %></h2>
             <p class="text-gray-700 text-lg mb-2"><%= dish.description %></p>
-            <%= link_to "Editar Prato", edit_restaurant_dish_path(user_restaurant, dish), class: "bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700" %>
+            <%= link_to "Editar Prato", edit_dish_path(dish), class: "bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700" %>
         </div>
         </div>
     <% end %>
@@ -37,9 +37,9 @@
                 <%= image_tag "sem-imagem.jpg", class: "w-32 h-32 object-cover rounded-lg mr-6" %>
             <% end %>
             <div>
-                <h2 class="text-2xl font-bold text-indigo-700 hover:text-indigo-900 mb-2"><%= link_to beverage.name, restaurant_beverage_path(user_restaurant, beverage) %></h2>
+                <h2 class="text-2xl font-bold text-indigo-700 hover:text-indigo-900 mb-2"><%= link_to beverage.name, beverage_path(beverage) %></h2>
                 <p class="text-gray-700 text-lg mb-2"><%= beverage.description %></p>
-                 <%= link_to "Editar Bebida", edit_restaurant_beverage_path(user_restaurant, beverage), class: "bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700" %>
+                 <%= link_to "Editar Bebida", edit_beverage_path(beverage), class: "bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700" %>
             </div>
         </div>
     <% end %>

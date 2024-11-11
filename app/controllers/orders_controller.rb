@@ -2,8 +2,7 @@ class OrdersController < ApplicationController
   skip_before_action :redirect_if_is_employee
 
   def new
-    @restaurant = user_restaurant
-    @menu = Menu.find_by(restaurant: @restaurant, id: params[:menu_id])
+    @menu = Menu.find_by(restaurant: user_restaurant, id: params[:menu_id])
     @items = @menu.items.where(is_active: true)
     @items_options = []
     @items.each do |item|
@@ -11,16 +10,15 @@ class OrdersController < ApplicationController
         @items_options << option
       end
     end
-    @customers = Customer.where(restaurant: @restaurant)
+    @customers = Customer.where(restaurant: user_restaurant)
     @order = Order.new
     @order.order_items.build 
   end
 
   def create
-    @restaurant = user_restaurant
-    @menu = Menu.find_by(restaurant: @restaurant, id: params[:menu_id])
+    @menu = Menu.find_by(restaurant: user_restaurant, id: params[:menu_id])
     @order = Order.new(order_params)
-    @order.restaurant = @restaurant
+    @order.restaurant = user_restaurant
     @order.status = "in_preparation"
   
     if @order.save
@@ -28,7 +26,7 @@ class OrdersController < ApplicationController
       redirect_to confirm_order_path(@order)
     else
       errors = @order.errors.full_messages.join(", ")
-      redirect_to new_restaurant_menu_order_path(@restaurant, @menu), alert: "Erro ao cadastrar pedido: \n#{errors}"
+      redirect_to new_menu_order_path(@menu), alert: "Erro ao cadastrar pedido: \n#{errors}"
     end
   end
 

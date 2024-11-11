@@ -5,10 +5,8 @@ class ItemsController < ApplicationController
       @dishes = nil
       @beverages = nil
     else
-      @dishes = Dish.where(restaurant: user_restaurant)
-                    .where("name LIKE ? OR description LIKE ?", "%#{@search}%", "%#{@search}%")
-      @beverages = Beverage.where(restaurant: user_restaurant)
-                           .where("name LIKE ? OR description LIKE ?", "%#{@search}%", "%#{@search}%")
+      @dishes = Dish.where(restaurant: user_restaurant).where("name LIKE ? OR description LIKE ?", "%#{@search}%", "%#{@search}%")
+      @beverages = Beverage.where(restaurant: user_restaurant).where("name LIKE ? OR description LIKE ?", "%#{@search}%", "%#{@search}%")
     end
   end
 
@@ -18,7 +16,7 @@ class ItemsController < ApplicationController
 
     status = item.is_active ? 'Ativo' : 'Inativo'
     flash[:notice] = "Status atualizado com sucesso para: #{status}" 
-    return redirect_to restaurant_dish_path(user_restaurant, item) if item.type == 'Dish'
-    redirect_to restaurant_beverage_path(user_restaurant, item) if item.type == 'Beverage'
+    return redirect_to dish_path(item) if item.type == 'Dish'
+    redirect_to beverage_path(item) if item.type == 'Beverage'
   end
 end

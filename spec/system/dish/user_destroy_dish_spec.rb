@@ -27,6 +27,6 @@ describe 'User destroy dish' do
     click_on 'Excluir Prato'
 
     expect(Dish.exists?(dish.id)).to be_falsy
-    expect(current_path).to eq restaurant_dishes_path(restaurant)
+    expect(current_path).to eq dishes_path
   end
 end

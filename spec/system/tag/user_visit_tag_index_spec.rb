@@ -7,7 +7,7 @@ describe 'User visit tag index page' do
     User.create!(restaurant: restaurant, email: 'teste@gmail.com', password: 'password1234', cpf: '00085364061', name: 'teste', last_name: 'da silva')
     Tag.create!(name: 'Apimentado', restaurant: restaurant)  
     
-    visit restaurant_tags_path(restaurant)
+    visit tags_path
 
     expect(page).to have_content 'Para continuar, faça login ou registre-se.'
     expect(current_path).to eq new_user_session_path
@@ -26,7 +26,7 @@ describe 'User visit tag index page' do
 
     expect(page).to have_content 'Apimentado'
     expect(page).to have_content 'Sem glúten'
-    expect(current_path).to eq restaurant_tags_path(restaurant)
+    expect(current_path).to eq tags_path
   end
 
   it "and shouldn't see the tag of others restaurants" do

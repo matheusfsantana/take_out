@@ -4,7 +4,7 @@ describe 'User visit tag index page' do
   it "and unauthenticated users shouldn't access the page" do
     restaurant = Restaurant.create!(corporate_name: 'hot lanches xyz', brand_name: 'hot lanches', cnpj: '84685592000112',
                                     full_address:'Rua da Hot, 721 - RJ',email:'contato@hotlanches.com', phone_number: '81987654321')
-    user = User.create!(restaurant: restaurant, email: 'teste@gmail.com', password: 'password1234', cpf: '00085364061', name: 'teste', last_name: 'da silva')
+    User.create!(restaurant: restaurant, email: 'teste@gmail.com', password: 'password1234', cpf: '00085364061', name: 'teste', last_name: 'da silva')
     Tag.create!(name: 'Apimentado', restaurant: restaurant)  
     
     visit restaurant_tags_path(restaurant)

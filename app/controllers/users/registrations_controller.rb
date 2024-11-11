@@ -13,15 +13,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     super do |user|
       employee = Employee.find_by(email: user.email) || Employee.find_by(cpf: user.cpf)
-      p "--------------_"
-      p employee.inspect
-      p "----------------"
-      
+
       if employee && !employee.is_registered?
         user.restaurant_id = employee.restaurant_id
         user.role = :employee 
-        p user.errors.full_messages
-        p employee.errors.full_messages
         employee.update(is_registered: true) if user.save
       end
     end

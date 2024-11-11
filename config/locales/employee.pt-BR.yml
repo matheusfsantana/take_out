@@ -1,0 +1,13 @@
+
+pt-BR:
+  activerecord:
+    models:
+      employee:
+        one: Funcionário
+        other: Funcionários
+    attributes:
+      employee:
+        email: E-mail 
+        cpf: CPF
+        is_registered: Está registrado?
+        

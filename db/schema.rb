@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_08_170720) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_11_044000) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -59,6 +59,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_08_170720) do
     t.datetime "updated_at", null: false
     t.integer "restaurant_id", null: false
     t.index ["restaurant_id"], name: "index_customers_on_restaurant_id"
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "email"
+    t.string "cpf"
+    t.boolean "is_registered"
+    t.integer "restaurant_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["restaurant_id"], name: "index_employees_on_restaurant_id"
   end
 
   create_table "item_options", force: :cascade do |t|
@@ -183,6 +193,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_08_170720) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bussiness_hours", "restaurants"
   add_foreign_key "customers", "restaurants"
+  add_foreign_key "employees", "restaurants"
   add_foreign_key "item_options", "items"
   add_foreign_key "item_tags", "items"
   add_foreign_key "item_tags", "tags"

@@ -1,6 +1,7 @@
 class Restaurant < ApplicationRecord
   belongs_to :user
   has_many :bussiness_hour
+  has_many :employees
 
   validates :corporate_name, :brand_name, :cnpj, :full_address, :phone_number, :email, :code, presence: true
   validates :phone_number, length: {in: 10..11}

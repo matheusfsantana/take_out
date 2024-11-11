@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe 'User register a customer' do
   it 'and should see all fields' do
-    user = User.create!(email: 'admin@gmail.com', name: 'Admin', last_name: 'adm', cpf: CPF.generate, password: 'password1234')
     restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
-                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+    user = User.create!(restaurant: restaurant, email: 'admin@gmail.com', name: 'Admin', last_name: 'adm', cpf: CPF.generate, password: 'password1234')
     first_dish = Dish.create!(name: 'Batata frita', description: 'testando', calories: 10, restaurant: restaurant)
     ItemOption.create!(description: 'Batata pequena', price: 10.00, item: first_dish)
     ItemOption.create!(description: 'Batata grande', price: 15.00, item: first_dish)
@@ -24,9 +24,9 @@ describe 'User register a customer' do
   end
 
   it 'and should register successfully' do
-    user = User.create!(email: 'admin@gmail.com', name: 'Admin', last_name: 'adm', cpf: CPF.generate, password: 'password1234')
     restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
-                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+    user = User.create!(restaurant: restaurant, email: 'admin@gmail.com', name: 'Admin', last_name: 'adm', cpf: CPF.generate, password: 'password1234')
     first_dish = Dish.create!(name: 'Batata frita', description: 'testando', calories: 10, restaurant: restaurant)
     ItemOption.create!(description: 'Batata pequena', price: 10.00, item: first_dish)
     ItemOption.create!(description: 'Batata grande', price: 15.00, item: first_dish)
@@ -47,9 +47,9 @@ describe 'User register a customer' do
   end
 
   it 'and should display an error message when fields are empty' do
-    user = User.create!(email: 'admin@gmail.com', name: 'Admin', last_name: 'adm', cpf: CPF.generate, password: 'password1234')
     restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
-                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+    user = User.create!(restaurant: restaurant, email: 'admin@gmail.com', name: 'Admin', last_name: 'adm', cpf: CPF.generate, password: 'password1234')
     first_dish = Dish.create!(name: 'Batata frita', description: 'testando', calories: 10, restaurant: restaurant)
     ItemOption.create!(description: 'Batata pequena', price: 10.00, item: first_dish)
     ItemOption.create!(description: 'Batata grande', price: 15.00, item: first_dish)
@@ -68,9 +68,9 @@ describe 'User register a customer' do
   end
 
   it 'and should display an error message when phone_number and email are empty' do
-    user = User.create!(email: 'admin@gmail.com', name: 'Admin', last_name: 'adm', cpf: CPF.generate, password: 'password1234')
     restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
-                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+    user = User.create!(restaurant: restaurant, email: 'admin@gmail.com', name: 'Admin', last_name: 'adm', cpf: CPF.generate, password: 'password1234')
     first_dish = Dish.create!(name: 'Batata frita', description: 'testando', calories: 10, restaurant: restaurant)
     ItemOption.create!(description: 'Batata pequena', price: 10.00, item: first_dish)
     ItemOption.create!(description: 'Batata grande', price: 15.00, item: first_dish)
@@ -88,9 +88,9 @@ describe 'User register a customer' do
   end
 
   it 'and should display an error message when cpf is present and is invalid' do
-    user = User.create!(email: 'admin@gmail.com', name: 'Admin', last_name: 'adm', cpf: CPF.generate, password: 'password1234')
     restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
-                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+    user = User.create!(restaurant: restaurant, email: 'admin@gmail.com', name: 'Admin', last_name: 'adm', cpf: CPF.generate, password: 'password1234')
     first_dish = Dish.create!(name: 'Batata frita', description: 'testando', calories: 10, restaurant: restaurant)
     ItemOption.create!(description: 'Batata pequena', price: 10.00, item: first_dish)
     ItemOption.create!(description: 'Batata grande', price: 15.00, item: first_dish)

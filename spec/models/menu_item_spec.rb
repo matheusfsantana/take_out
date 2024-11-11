@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe MenuItem, type: :model do
   describe '#valid' do
     it 'should be true when the same dish or beverage are registered for different menus' do
-      user = User.create!(email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
       restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: '34.651.791/0001-31',
-                                      full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+                                      full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+      User.create!(restaurant: restaurant, email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
       dish = Dish.create!(name: 'Pão com queijo', description: 'testando', calories: 10, restaurant: restaurant)
       beverage = Beverage.create!(name: 'Café', description: 'teste', calories: 300, alcoholic: true, restaurant: restaurant)
       first_menu = Menu.create!(name: 'Café da manhã', restaurant: restaurant)

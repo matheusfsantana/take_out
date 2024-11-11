@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe OptionHistorical, type: :model do
   describe "#valid" do
     it 'false when historical price is empty' do
-      user = User.create!(email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
       restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: '34.651.791/0001-31',
-                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+      User.create!(restaurant: restaurant, email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
       item = Item.create!(name: 'Teste', description: 'a', calories: 10, restaurant: restaurant)
       option = ItemOption.create!(description: 'Teste', price: '1', item: item)
 
@@ -16,9 +16,9 @@ RSpec.describe OptionHistorical, type: :model do
     end 
 
     it 'false when historical price is negative' do
-      user = User.create!(email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
       restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: '34.651.791/0001-31',
-                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+      User.create!(restaurant: restaurant, email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
       item = Item.create!(name: 'Teste', description: 'a', calories: 10, restaurant: restaurant)
       option = ItemOption.create!(description: 'Teste', price: '1', item: item)
 
@@ -29,9 +29,9 @@ RSpec.describe OptionHistorical, type: :model do
     end 
 
     it 'false when historical price is zero' do
-      user = User.create!(email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
       restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: '34.651.791/0001-31',
-                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+      User.create!(restaurant: restaurant, email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
       item = Item.create!(name: 'Teste', description: 'a', calories: 10, restaurant: restaurant)
       option = ItemOption.create!(description: 'Teste', price: '1', item: item)
 
@@ -42,9 +42,9 @@ RSpec.describe OptionHistorical, type: :model do
     end 
 
     it 'false when price_changed_at price is empty' do
-      user = User.create!(email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
       restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: '34.651.791/0001-31',
-                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+      User.create!(restaurant: restaurant, email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
       item = Item.create!(name: 'Teste', description: 'a', calories: 10, restaurant: restaurant)
       option = ItemOption.create!(description: 'Teste', price: '1', item: item)
 
@@ -55,9 +55,9 @@ RSpec.describe OptionHistorical, type: :model do
     end 
 
     it 'false when item_option is empty' do
-      user = User.create!(email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
       restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: '34.651.791/0001-31',
-                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+      User.create!(restaurant: restaurant, email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
       item = Item.create!(name: 'Teste', description: 'a', calories: 10, restaurant: restaurant)
       ItemOption.create!(description: 'Teste', price: '1', item: item)
 
@@ -68,9 +68,9 @@ RSpec.describe OptionHistorical, type: :model do
     end 
 
     it 'true when all fields are filled' do
-      user = User.create!(email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
       restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: '34.651.791/0001-31',
-                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+      User.create!(restaurant: restaurant, email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
       item = Item.create!(name: 'Teste', description: 'a', calories: 10, restaurant: restaurant)
       option = ItemOption.create!(description: 'Teste', price: '1', item: item)
 

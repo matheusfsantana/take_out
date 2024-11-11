@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe 'User register a menu to restaurant' do
   it 'and should see the fields' do
-    user = User.create!(email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
     restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: '34.651.791/0001-31',
-                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+    user = User.create!(restaurant: restaurant, email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
     Dish.create!(name: 'Pão com queijo', description: 'testando', calories: 10, restaurant: restaurant)
     Dish.create!(name: 'Pão com ovo', description: 'testando', calories: 10, restaurant: restaurant)
     Beverage.create!(name: 'Café', description: 'teste', calories: 300, alcoholic: true, restaurant: restaurant)
@@ -26,9 +26,9 @@ describe 'User register a menu to restaurant' do
   end
 
   it 'and should see a message when no dishes and no beverages are registered' do
-    user = User.create!(email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
-    Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: '34.651.791/0001-31',
-                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+    restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: '34.651.791/0001-31',
+                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+    user = User.create!(restaurant: restaurant, email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
 
     login_as(user)
     visit root_path
@@ -43,9 +43,9 @@ describe 'User register a menu to restaurant' do
   end
 
   it 'and should register a new menu successfully' do
-    user = User.create!(email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
     restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: '34.651.791/0001-31',
-                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+    user = User.create!(restaurant: restaurant, email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
     Dish.create!(name: 'Pão com queijo', description: 'testando', calories: 10, restaurant: restaurant)
     selected_dish = Dish.create!(name: 'Pão com ovo', description: 'testando', calories: 10, restaurant: restaurant)
     selected_beverage = Beverage.create!(name: 'Café', description: 'teste', calories: 300, alcoholic: true, restaurant: restaurant)
@@ -67,9 +67,9 @@ describe 'User register a menu to restaurant' do
   end
 
   it 'and should see a error message when name field is empty' do
-    user = User.create!(email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
     restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: '34.651.791/0001-31',
-                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+    user = User.create!(restaurant: restaurant, email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
     Dish.create!(name: 'Pão com queijo', description: 'testando', calories: 10, restaurant: restaurant)
     Dish.create!(name: 'Pão com ovo', description: 'testando', calories: 10, restaurant: restaurant)
     Beverage.create!(name: 'Café', description: 'teste', calories: 300, alcoholic: true, restaurant: restaurant)
@@ -88,9 +88,9 @@ describe 'User register a menu to restaurant' do
   end
 
   it 'and should see a error message when name already exists for your restaurant' do
-    user = User.create!(email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
     restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: '34.651.791/0001-31',
-                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+    user = User.create!(restaurant: restaurant, email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
     Menu.create!(name: 'Café da manhã', restaurant: restaurant)
 
     login_as(user)

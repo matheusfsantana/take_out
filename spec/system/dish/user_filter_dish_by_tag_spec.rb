@@ -2,16 +2,17 @@ require 'rails_helper'
 
 describe 'User filter dish by tag' do
   it 'and should filter only dishs and tags of your restaurant' do
-    first_user = User.create!(email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
     first_user_restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
-                                               full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: first_user)
+                                               full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+    User.create!(restaurant: first_user_restaurant, email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
+
     first_dish = Dish.create!(name: 'Prato primeiro usuario', description: 'testando', calories: 10, restaurant: first_user_restaurant)
     first_user_tag = Tag.create!(name: 'Apimentado', restaurant: first_user_restaurant)
     ItemTag.create!(item: first_dish, tag: first_user_tag)
 
-    second_user = User.create!(email: 'abcd@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
     second_user_restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
-                                                full_address:'Rua da Hot, 721 - RJ',email:'contato@lanches.com', phone_number: '81987654321', user: second_user)
+                                                full_address:'Rua da Hot, 721 - RJ',email:'contato@lanches.com', phone_number: '81987654321')
+    second_user = User.create!(restaurant: second_user_restaurant, email: 'abcd@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
     second_dish = Dish.create!(name: 'Prato segundo usuario', description: 'testando', calories: 10, restaurant: second_user_restaurant)
     second_user_tag = Tag.create!(name: 'Apimentado', restaurant: second_user_restaurant)
     ItemTag.create!(item: second_dish, tag: second_user_tag)
@@ -26,9 +27,9 @@ describe 'User filter dish by tag' do
   end
 
   it 'and should filter successfully' do
-    user = User.create!(email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
     restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
-                                               full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+                                               full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+    user = User.create!(restaurant: restaurant, email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
     dish = Dish.create!(name: 'Primeiro prato', description: 'testando', calories: 10, restaurant: restaurant)
     second_dish = Dish.create!(name: 'Segundo prato', description: 'testando', calories: 10, restaurant: restaurant)
     third_dish = Dish.create!(name: 'Terceiro prato', description: 'testando', calories: 10, restaurant: restaurant)
@@ -53,9 +54,9 @@ describe 'User filter dish by tag' do
   end
 
   it 'and should clean filter successfully' do
-    user = User.create!(email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
     restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
-                                               full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321', user: user)
+                                               full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+    user = User.create!(restaurant: restaurant, email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
     dish = Dish.create!(name: 'Primeiro prato', description: 'testando', calories: 10, restaurant: restaurant)
     second_dish = Dish.create!(name: 'Segundo prato', description: 'testando', calories: 10, restaurant: restaurant)
     third_dish = Dish.create!(name: 'Terceiro prato', description: 'testando', calories: 10, restaurant: restaurant)

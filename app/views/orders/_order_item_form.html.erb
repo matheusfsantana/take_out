@@ -1,0 +1,15 @@
+<div class="order-item-fields mb-6 p-4 border border-gray-200 rounded-lg">
+    <div class="form-group mb-4">
+        <%= order_item_form.label :item_option_id, class: "block text-sm font-medium text-gray-700" %>
+        <%= order_item_form.collection_select :item_option_id, @items_options, :id, :description_and_price, { prompt: "Selecione um item" }, class: "form-control block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+    </div>
+
+    <div class="form-group mb-4">
+        <%= order_item_form.label :observation, class: "block text-sm font-medium text-gray-700" %>
+        <%= order_item_form.text_area :observation, class: "form-control block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+    </div>
+
+    <button type="button" class="text-red-500 hover:text-red-700 ml-4" data-action="click->order-item#removeItem">
+        Remover
+    </button>
+</div>

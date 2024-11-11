@@ -7,6 +7,10 @@ class ItemOption < ApplicationRecord
 
   before_update :save_option_historical
 
+  def description_and_price
+    "#{self.description} - R$ #{'%.2f' % self.price.to_f.round(2)}"
+  end
+
   def save_option_historical
     last_register = ItemOption.find_by(id: self.id)
     

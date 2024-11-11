@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      customer: 
+        one: Cliente
+        other: Clientes
+    attributes:
+      customer:
+        restaurant: Restaurante
+        restaurant_id: Restaurante
+        name: Nome
+        cpf: CPF
+        email: E-mail
+        phone_number: Telefone

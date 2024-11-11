@@ -1,0 +1,33 @@
+  <h2 class="text-2xl font-semibold mb-4">Finalizar pedido <%= @order.code %></h2>
+<h4 class="text-xl font-medium mb-3">Cliente: <span><%= @order.customer.name %></span></h4>
+<h4 class="text-xl font-medium mb-3">E-mail: <span><%= @order.customer.email.present? ? @order.customer.email : "Não informado" %></span></h4>
+<h4 class="text-xl font-medium mb-3">Telefone: <span><%= @order.customer.phone_number.present? ? @order.customer.phone_number : "Não informado" %></span></h4>
+<h4 class="text-xl font-medium mb-3">CPF: <span><%= @order.customer.cpf.present? ? @order.customer.cpf : "Não informado" %></span></h4>
+
+
+<h3 class="text-xl font-medium mb-3"></h3>
+<div class="w-1/2 flex flex-col mt-4 mb-4">
+    <h1 class="text-2xl font-bold text-gray-800 mb-2">Itens do pedido</h1>
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Item</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Observação</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Preço</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <% @order.order_items.each do |item| %>
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= item.item_option.description %></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= item.observation.blank? ? '-' : item.observation %></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= number_to_currency(item.item_option.price) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+
+<h4 class="text-lg font-semibold mb-3">Total do Pedido: <%= number_to_currency(@order.total) %></h4>
+
+<%= button_to 'Finalizar pedido', confirm_order_path(@order), method: :post, class: "bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700" %>

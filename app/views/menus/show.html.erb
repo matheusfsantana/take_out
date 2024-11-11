@@ -1,8 +1,11 @@
-<div class="w-full flex items-center justify-start mb-6">
-    <%= link_to root_path, class: "flex items-center" do %>
-    <%= image_tag 'left_arrow.png'%>
-    <% end %>
-    <h1 class="ml-3 text-3xl font-bold text-gray-800"><%= Menu.model_name.human%> - <%= @menu.name %></h1>
+<div class="w-full flex items-center justify-between mb-6">
+    <div>
+        <%= link_to root_path, class: "flex items-center" do %>
+            <%= image_tag 'left_arrow.png'%>
+        <% end %>
+        <h1 class="ml-3 text-3xl font-bold text-gray-800"><%= Menu.model_name.human%> - <%= @menu.name %></h1>
+    </div>
+    <%= link_to 'Registrar pedido', new_restaurant_menu_order_path(@menu, @restaurant) %>
 </div>
 
 <% if @dishes.blank? && @beverages.blank? %>

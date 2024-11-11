@@ -1,0 +1,24 @@
+pt-BR:
+  activerecord:
+    models:
+      order: 
+        one: Pedido
+        other: Pedidos
+    attributes:
+      order:
+        customer_id: Cliente
+        customer: Cliente
+        restaurant_id: Restaurante
+        restaurant: Restaurante
+        code: Código
+        order_date: Data do pedido
+        order_item: 'Item do pedido'
+        order_item_id: 'Item do pedido'
+        status: Status
+        statuses:  
+          pending_confirmation: "Pendente de confirmação"
+          pending_kitchen: "Pendente de confirmação da cozinha"
+          in_preparation: "Em preparação"
+          canceled: "Cancelado"
+          ready: "Pronto para retirada"
+          delivered: "Entregue"

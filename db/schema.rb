@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_06_012527) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_08_170720) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -48,6 +48,17 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_06_012527) do
     t.datetime "updated_at", null: false
     t.boolean "is_open", default: false, null: false
     t.index ["restaurant_id"], name: "index_bussiness_hours_on_restaurant_id"
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.string "cpf"
+    t.string "phone_number"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "restaurant_id", null: false
+    t.index ["restaurant_id"], name: "index_customers_on_restaurant_id"
   end
 
   create_table "item_options", force: :cascade do |t|
@@ -107,6 +118,30 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_06_012527) do
     t.index ["item_option_id"], name: "index_option_historicals_on_item_option_id"
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.integer "order_id", null: false
+    t.integer "item_option_id", null: false
+    t.string "observation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "price_at_order"
+    t.index ["item_option_id"], name: "index_order_items_on_item_option_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "customer_id", null: false
+    t.decimal "total"
+    t.integer "status", default: 0
+    t.string "code"
+    t.datetime "order_date"
+    t.integer "restaurant_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["restaurant_id"], name: "index_orders_on_restaurant_id"
+  end
+
   create_table "restaurants", force: :cascade do |t|
     t.string "corporate_name"
     t.string "brand_name"
@@ -147,6 +182,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_06_012527) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bussiness_hours", "restaurants"
+  add_foreign_key "customers", "restaurants"
   add_foreign_key "item_options", "items"
   add_foreign_key "item_tags", "items"
   add_foreign_key "item_tags", "tags"
@@ -155,6 +191,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_06_012527) do
   add_foreign_key "menu_items", "menus"
   add_foreign_key "menus", "restaurants"
   add_foreign_key "option_historicals", "item_options"
+  add_foreign_key "order_items", "item_options"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "orders", "restaurants"
   add_foreign_key "restaurants", "users"
   add_foreign_key "tags", "restaurants"
 end

@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      order_item: 
+        one: Item do pedido
+        other: Itens do pedido
+    attributes:
+      order_item:
+        order_id: Pedido
+        order: Pedido
+        item_option: Item
+        item_option_id: Item
+        price_at_order: Valor
+        observation: Observação

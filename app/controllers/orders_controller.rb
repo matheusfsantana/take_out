@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  skip_before_action :redirect_if_is_employee
+
   def new
     @restaurant = user_restaurant
     @menu = Menu.find_by(restaurant: @restaurant, id: params[:menu_id])

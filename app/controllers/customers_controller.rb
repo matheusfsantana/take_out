@@ -1,4 +1,5 @@
 class CustomersController < ApplicationController
+  skip_before_action :redirect_if_is_employee
   def new
     session[:previous_path] = request.referer 
     @previous_path = session[:previous_path]

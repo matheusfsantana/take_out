@@ -10,6 +10,7 @@
 restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
                                 full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
 User.create!(restaurant: restaurant, email: 'admin@gmail.com', name: 'Admin', last_name: 'adm', cpf: CPF.generate, password: 'password1234')
+User.create!(role: :employee, restaurant: restaurant, email: 'employee@gmail.com', name: 'employee', last_name: 'adm', cpf: CPF.generate, password: 'password1234')
 first_dish = Dish.create!(name: 'Batata frita', description: 'testando', calories: 10, restaurant: restaurant)
 first_beverage = Beverage.create!(is_active: false, name: 'Refrigerante lata', description: 'teste', calories: 300, alcoholic: false, restaurant: restaurant)
 ItemOption.create!(description: 'Batata pequena', price: 10.00, item: first_dish)

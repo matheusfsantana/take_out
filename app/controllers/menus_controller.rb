@@ -1,4 +1,6 @@
 class MenusController < ApplicationController
+  skip_before_action :redirect_if_is_employee
+  
   def new
     @restaurant = Restaurant.find(params[:restaurant_id])
     @menu = Menu.new

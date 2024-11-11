@@ -6,6 +6,8 @@ class User < ApplicationRecord
   validates :name, :last_name, :cpf, presence: true
   validates :cpf, uniqueness: true
   validate :cpf_must_be_valid
+  enum role: { :owner => 0, :employee => 5 }
+  belongs_to :restaurant, optional: true 
 
   before_validation :strip_cpf
 

@@ -7,12 +7,12 @@ class RestaurantsController < ApplicationController
   def create
     new_restaurant_params = params.require(:restaurant).permit(:corporate_name, :brand_name, :email, :cnpj, :full_address, :phone_number)
     @restaurant = Restaurant.new(new_restaurant_params)
-    @restaurant.user = current_user
-
-    return redirect_to root_path, notice: 'Restaurante registrado com sucesso.' if @restaurant.save
-
+    
+    if @restaurant.save
+      current_user.update(restaurant: @restaurant)
+      return redirect_to root_path, notice: 'Restaurante registrado com sucesso.' 
+    end
+    
     render :new, status: :unprocessable_entity
   end
-
-
 end

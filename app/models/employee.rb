@@ -2,8 +2,7 @@ class Employee < ApplicationRecord
   belongs_to :restaurant
   validates :email, :cpf, presence: true
   validates :email, :cpf, uniqueness: true
-  validate :email_must_be_unique, :email_must_be_valid, :cpf_must_be_unique, :cpf_must_be_valid
-  before_create :set_default
+  before_create :set_default, :email_must_be_unique, :email_must_be_valid, :cpf_must_be_unique, :cpf_must_be_valid
 
   private
   def email_must_be_valid

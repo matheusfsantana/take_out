@@ -1,9 +1,9 @@
 module ApplicationHelper
   def has_restaurant?
-    Restaurant.exists?(user: current_user)
+    current_user.restaurant != nil
   end
 
   def user_restaurant
-    Restaurant.find_by(user: current_user)
+    current_user.restaurant
   end
 end

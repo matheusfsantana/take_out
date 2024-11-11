@@ -8,14 +8,14 @@ class ApplicationController < ActionController::Base
  
   protected
   def check_if_user_has_restaurant
-    if user_signed_in? && !Restaurant.exists?(user: current_user)
+    if user_signed_in? && current_user.restaurant.blank?
       flash[:info] = 'É necessário registrar seu restaurante antes de prosseguir.'
       return redirect_to new_restaurant_path
     end
   end
 
   def user_restaurant
-    Restaurant.find_by(user: current_user)
+    current_user.restaurant
   end
   
   def configure_permitted_parameters

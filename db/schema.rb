@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_11_044000) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_11_055641) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -160,10 +160,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_11_044000) do
     t.string "phone_number"
     t.string "email"
     t.string "code"
-    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_restaurants_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -185,8 +183,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_11_044000) do
     t.string "cpf"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "restaurant_id"
+    t.integer "role", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["restaurant_id"], name: "index_users_on_restaurant_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -206,6 +207,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_11_044000) do
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "customers"
   add_foreign_key "orders", "restaurants"
-  add_foreign_key "restaurants", "users"
   add_foreign_key "tags", "restaurants"
+  add_foreign_key "users", "restaurants"
 end

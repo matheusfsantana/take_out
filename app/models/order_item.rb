@@ -5,6 +5,10 @@ class OrderItem < ApplicationRecord
 
   before_validation :set_price_at_order, if: :new_record?
 
+  def description
+    self.item_option.description
+  end
+  
   private
   def set_price_at_order
     self.price_at_order = self.item_option.price

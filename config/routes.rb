@@ -30,4 +30,17 @@ Rails.application.routes.draw do
   post 'update_item_status/:item_id', to: "items#update_status", as: 'update_item_status'
   
   root "home#index"
+
+  namespace :api do
+    namespace :v1 do
+      resources :restaurants, param: :code, only: [] do
+        resources :orders, param: :code, only: [:index, :show] do
+          member do 
+            post "to_preparation"
+            post "to_ready"
+          end
+        end
+      end
+    end
+  end
 end

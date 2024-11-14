@@ -4,6 +4,7 @@ class OrderItem < ApplicationRecord
   validates :price_at_order, presence: true
 
   before_validation :set_price_at_order, if: :new_record?
+  before_validation :set_observation
 
   def description
     self.item_option.description
@@ -13,13 +14,12 @@ class OrderItem < ApplicationRecord
     sprintf('%.2f', self[:price_at_order])
   end
 
-  def observation
-    return self[:observation] if self[:observation]
-    "-"
-  end
-  
   private
   def set_price_at_order
     self.price_at_order = self.item_option.price
+  end
+
+  def set_observation
+    self.observation ||= '-'
   end
 end

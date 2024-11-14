@@ -32,7 +32,7 @@ class Order < ApplicationRecord
   end
   
   def must_have_at_least_one_order_item
-    if order_items.empty? || order_items.all? { |item| item.marked_for_destruction? }
+    if order_items.empty? 
       errors.add(:order_item, "deve conter pelo menos um item.")
     end
   end

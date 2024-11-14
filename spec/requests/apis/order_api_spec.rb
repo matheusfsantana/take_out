@@ -36,11 +36,11 @@ describe 'Order API' do
       expect(json_response['status']).to eq "Pendente de confirmação da cozinha"
       expect(json_response['order_date']).to eq "2024-11-12T10:00:00.000Z"
       expect(json_response['order_items'][0]['description']).to eq 'Batata pequena'
-      expect(json_response['order_items'][0]['price_at_order']).to eq '10.0'
+      expect(json_response['order_items'][0]['price_at_order']).to eq '10.00'
       expect(json_response['order_items'][0]['observation']).to eq 'teste'
       expect(json_response['order_items'][1]['description']).to eq 'Batata grande'
-      expect(json_response['order_items'][1]['price_at_order']).to eq '15.0'
-      expect(json_response['total']).to eq '25.0'
+      expect(json_response['order_items'][1]['price_at_order']).to eq '15.00'
+      expect(json_response['total']).to eq '25.00'
     end
 
     it 'fail' do 
@@ -51,7 +51,7 @@ describe 'Order API' do
   end
 
   context 'GET /api/v1/restaurants/:restaurant_code/orders/?status=' do
-    it 'return all orders when status param is not provided' do
+    it 'return all orders ordered by status when status param is not provided' do
       allow(SecureRandom).to receive(:alphanumeric).and_return("REST99") 
       restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
                                       full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
@@ -96,8 +96,8 @@ describe 'Order API' do
 
       expect(json_response.length).to eq 3
       expect(json_response[0]['status']).to eq "Pendente de confirmação da cozinha"
-      expect(json_response[1]['status']).to eq "Pronto para retirada"
-      expect(json_response[2]['status']).to eq "Em preparação"
+      expect(json_response[1]['status']).to eq "Em preparação"
+      expect(json_response[2]['status']).to eq "Pronto para retirada"
     end
 
     it 'return only orders with the specifed status when status param is provided' do
@@ -185,8 +185,8 @@ describe 'Order API' do
   
       expect(response.status).to eq 200
       json_response = JSON.parse(response.body)
-      expect(json_response).to eq({}) 
-      expect(order.reload.status).to eq 'in_preparation'
+      expect(json_response['status']).to eq 'Em preparação'
+
     end
   
     it 'returns not found when order does not exist' do
@@ -223,8 +223,7 @@ describe 'Order API' do
   
       expect(response.status).to eq 200
       json_response = JSON.parse(response.body)
-      expect(json_response).to eq({}) 
-      expect(order.reload.status).to eq 'ready'
+      expect(json_response['status']).to eq 'Pronto para retirada'
     end
   
     it 'returns not found when order does not exist' do

@@ -29,7 +29,7 @@ User.find_or_create_by!(email: 'employee@gmail.com') do |user|
   user.restaurant = restaurant
   user.role = :employee
   user.name = 'employee'
-  user.last_name = 'adm'
+  user.last_name = 'emp'
   user.cpf = CPF.generate
   user.password = 'password1234'
 end
@@ -66,10 +66,7 @@ second_beverage_option = ItemOption.find_or_create_by!(description: 'Fanta 500ml
   option.item = first_beverage
 end
 
-menu = Menu.find_or_create_by!(name: 'Lanches', restaurant: restaurant) do |m|
-  m.name = "Lanches",
-  m.restaurant = restaurant
-end
+menu = Menu.find_or_create_by!(name: 'Lanches', restaurant: restaurant)
 
 MenuItem.find_or_create_by!(menu: menu, item: first_dish)
 MenuItem.find_or_create_by!(menu: menu, item: first_beverage)
@@ -109,11 +106,13 @@ order_configurations = [
   ]
 ]
 
-order_configurations.each do |order_items|
-  o = Order.create!(customer: customer, restaurant: restaurant, order_items_attributes: order_items)
-  random_hours = rand(0.0..3.0).round(2) 
-  o.order_date = random_hours.hours.ago
-  o.pending_kitchen!
+3.times do
+  order_configurations.each do |order_items|
+    o = Order.create!(customer: customer, restaurant: restaurant, order_items_attributes: order_items)
+    random_hours = rand(0.1..3.0).round(2) 
+    o.order_date = random_hours.hours.ago
+    o.pending_kitchen!
+  end
 end
 
 puts "Seed completed"

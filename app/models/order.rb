@@ -13,6 +13,9 @@ class Order < ApplicationRecord
   before_validation :set_default, :generate_random_code, on: :create
   validate :must_have_at_least_one_order_item
   
+  def total
+    sprintf('%.2f', self[:total])
+  end
   
   private
   def calculate_total

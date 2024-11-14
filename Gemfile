@@ -52,3 +52,5 @@ gem "cpf_cnpj", "~> 0.5.0"
 
 gem "image_processing", ">= 1.2"
 
+
+gem "rack-cors", "~> 2.0"

@@ -7,17 +7,113 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
-                                full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
-User.create!(restaurant: restaurant, email: 'admin@gmail.com', name: 'Admin', last_name: 'adm', cpf: CPF.generate, password: 'password1234')
-User.create!(role: :employee, restaurant: restaurant, email: 'employee@gmail.com', name: 'employee', last_name: 'adm', cpf: CPF.generate, password: 'password1234')
-first_dish = Dish.create!(name: 'Batata frita', description: 'testando', calories: 10, restaurant: restaurant)
-first_beverage = Beverage.create!(is_active: false, name: 'Refrigerante lata', description: 'teste', calories: 300, alcoholic: false, restaurant: restaurant)
-ItemOption.create!(description: 'Batata pequena', price: 10.00, item: first_dish)
-ItemOption.create!(description: 'Batata grande', price: 15.00, item: first_dish)
-ItemOption.create!(description: 'Coca-cola 500ml', price: 6.00,item: first_beverage)
-ItemOption.create!(description: 'Fanta 500ml',price: 5.00, item: first_beverage)
-menu = Menu.create!(name: 'Lanches', restaurant: restaurant)
-MenuItem.create!(menu: menu, item: first_dish)
-MenuItem.create!(menu: menu, item: first_beverage)
-Customer.create!(name: 'Joãozinho', email: 'cliente@gmail.com', phone_number: '81987654321', cpf: CPF.generate, restaurant: restaurant)
+
+restaurant = Restaurant.find_or_create_by!(corporate_name: 'Hot Lanches') do |r|
+  r.brand_name = 'hot lanches'
+  r.cnpj = CNPJ.generate
+  r.full_address = 'Rua da Hot, 721 - RJ'
+  r.email = 'contato@lancheshot.com'
+  r.phone_number = '81987654321'
+end
+restaurant.update!(code: 'REST99')
+
+User.find_or_create_by!(email: 'admin@gmail.com') do |user|
+  user.restaurant = restaurant
+  user.name = 'Admin'
+  user.last_name = 'adm'
+  user.cpf = CPF.generate
+  user.password = 'password1234'
+end
+
+User.find_or_create_by!(email: 'employee@gmail.com') do |user|
+  user.restaurant = restaurant
+  user.role = :employee
+  user.name = 'employee'
+  user.last_name = 'adm'
+  user.cpf = CPF.generate
+  user.password = 'password1234'
+end
+
+first_dish = Dish.find_or_create_by!(name: 'Batata frita', restaurant: restaurant) do |dish|
+  dish.description = 'testando'
+  dish.calories = 10
+end
+
+first_beverage = Beverage.find_or_create_by!(name: 'Refrigerante lata', restaurant: restaurant) do |beverage|
+  beverage.is_active = true
+  beverage.description = 'teste'
+  beverage.calories = 300
+  beverage.alcoholic = false
+end
+
+first_dish_option = ItemOption.find_or_create_by!(description: 'Batata pequena') do |option|
+  option.price = 10.00
+  option.item = first_dish
+end
+
+second_dish_option = ItemOption.find_or_create_by!(description: 'Batata grande') do |option|
+  option.price = 15.00
+  option.item = first_dish
+end
+
+first_beverage_option = ItemOption.find_or_create_by!(description: 'Coca-cola 500ml') do |option|
+  option.price = 6.00
+  option.item = first_beverage
+end
+
+second_beverage_option = ItemOption.find_or_create_by!(description: 'Fanta 500ml') do |option|
+  option.price = 5.00
+  option.item = first_beverage
+end
+
+menu = Menu.find_or_create_by!(name: 'Lanches', restaurant: restaurant) do |m|
+  m.name = "Lanches",
+  m.restaurant = restaurant
+end
+
+MenuItem.find_or_create_by!(menu: menu, item: first_dish)
+MenuItem.find_or_create_by!(menu: menu, item: first_beverage)
+
+customer = Customer.find_or_create_by!(email: 'cliente@gmail.com') do |cust|
+  cust.name = 'Joãozinho'
+  cust.phone_number = '81987654321'
+  cust.cpf = CPF.generate
+  cust.restaurant = restaurant
+end
+
+order_configurations = [
+  [
+    { item_option: first_dish_option, observation: 'sem sal' },
+    { item_option: first_beverage_option }
+  ],
+  [
+    { item_option: first_dish_option, observation: 'com cheedar' },
+    { item_option: first_beverage_option }
+  ],
+  [
+    { item_option: first_dish_option, observation: 'com cheedar' },
+    { item_option: first_dish_option },
+    { item_option: first_beverage_option },
+    { item_option: first_beverage_option }
+  ],
+  [
+    { item_option: first_dish_option},
+    { item_option: second_dish_option },
+    { item_option: second_dish_option },
+    { item_option: second_beverage_option , observation: 'com gelo' },
+    { item_option: first_beverage_option , observation: 'com gelo' }
+  ],
+  [
+    { item_option: second_dish_option, observation: 'teste' },
+    { item_option: first_beverage_option }
+  ]
+]
+
+order_configurations.each do |order_items|
+  o = Order.create!(customer: customer, restaurant: restaurant, order_items_attributes: order_items)
+  random_hours = rand(0.0..3.0).round(2) 
+  o.order_date = random_hours.hours.ago
+  o.pending_kitchen!
+end
+
+puts "Seed completed"

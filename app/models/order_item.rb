@@ -8,6 +8,15 @@ class OrderItem < ApplicationRecord
   def description
     self.item_option.description
   end
+
+  def price_at_order
+    sprintf('%.2f', self[:price_at_order])
+  end
+
+  def observation
+    return self[:observation] if self[:observation]
+    "-"
+  end
   
   private
   def set_price_at_order

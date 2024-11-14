@@ -3,9 +3,9 @@ class Api::V1::OrdersController < ActionController::API
 
   def index
     order = if params[:status].present? && Order.statuses.keys.include?(params[:status])
-      Order.where(restaurant: @restaurant, status: params[:status])
+      Order.where(restaurant: @restaurant, status: params[:status]).order(order_date: :asc)
     else
-      Order.where(restaurant: @restaurant)
+      Order.where(restaurant: @restaurant).order(:status, order_date: :asc)
     end
 
     order_details = order.as_json(
@@ -54,7 +54,19 @@ class Api::V1::OrdersController < ActionController::API
     end
 
     order.in_preparation!
-    render json: {}, status: :ok
+    order_details = order.as_json(
+      only: [:id, :status, :code, :order_date, :total],
+      include: [
+        customer: { only: [:name, :phone_number, :email] },
+        order_items: {
+          only: [:price_at_order, :observation],  
+          methods: [:description]
+        }
+      ]
+    )
+    order_details['status'] = Order.human_enum_name(:status, order.status)
+
+    render json: order_details, status: :ok
   end
 
   def to_ready
@@ -65,7 +77,18 @@ class Api::V1::OrdersController < ActionController::API
     end
 
     order.ready!
-    render json: {}, status: :ok
+    order_details = order.as_json(
+      only: [:id, :status, :code, :order_date, :total],
+      include: [
+        customer: { only: [:name, :phone_number, :email] },
+        order_items: {
+          only: [:price_at_order, :observation],  
+          methods: [:description]
+        }
+      ]
+    )
+    order_details['status'] = Order.human_enum_name(:status, order.status)
+    render json: order_details, status: :ok
   end
 
   private

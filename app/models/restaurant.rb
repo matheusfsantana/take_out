@@ -9,7 +9,8 @@ class Restaurant < ApplicationRecord
   validates :email, :cnpj, uniqueness: true
   validate :cnpj_must_be_valid, :email_must_be_valid
   
-  before_validation :strip_cnpj, :generate_code
+  before_validation :strip_cnpj
+  before_validation :generate_code, on: :create
   after_create :create_bussiness_hours
 
   private

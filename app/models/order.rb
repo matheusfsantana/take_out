@@ -9,7 +9,7 @@ class Order < ApplicationRecord
   accepts_nested_attributes_for :order_items, allow_destroy: true, reject_if: :all_blank
   
   enum :status, {:pending_confirmation=>0, :pending_kitchen=>5, :in_preparation=>10, :canceled=>15, :ready=>20, :delivered=>25}  
-  before_validation :calculate_total
+  before_validation :calculate_total, :reason_must_be_present_if_canceled
   before_validation :set_default, :generate_random_code, on: :create
   validate :must_have_at_least_one_order_item
   
@@ -18,6 +18,11 @@ class Order < ApplicationRecord
   end
   
   private
+
+  def reason_must_be_present_if_canceled
+    errors.add(:canceled_reason, "deve ser especificada caso cancele o pedido") if self.canceled? && self.canceled_reason.blank?
+  end
+
   def calculate_total
     self.total = self.order_items.sum { |item| item.item_option&.price}
   end

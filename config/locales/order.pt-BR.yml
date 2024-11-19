@@ -22,3 +22,4 @@ pt-BR:
           canceled: "Cancelado"
           ready: "Pronto para retirada"
           delivered: "Entregue"
+        canceled_reason: Razão de Cancelamento

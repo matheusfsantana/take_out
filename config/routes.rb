@@ -38,6 +38,7 @@ Rails.application.routes.draw do
           member do 
             post "to_preparation"
             post "to_ready"
+            post "to_canceled"
           end
         end
       end

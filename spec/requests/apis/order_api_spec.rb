@@ -235,4 +235,72 @@ describe 'Order API' do
       expect(response.status).to eq 404
     end
   end
+
+  context 'POST /api/v1/restaurants/:restaurant_code/orders/:order_code/to_canceled' do
+    it 'successfully changes order status to canceled' do
+      allow(SecureRandom).to receive(:alphanumeric).and_return("REST99") 
+      restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
+                                      full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+      first_dish = Dish.create!(name: 'Batata frita', description: 'testando', calories: 10, restaurant: restaurant)
+      first_item_option = ItemOption.create!(description: 'Batata pequena', price: 10.00, item: first_dish)
+      second_item_option = ItemOption.create!(description: 'Batata grande', price: 15.00, item: first_dish)
+      customer = Customer.create!(name: 'Joãozinho', email: 'cliente@gmail.com', phone_number: '81987654321', cpf: CPF.generate, restaurant: restaurant)
+      
+      allow(SecureRandom).to receive(:alphanumeric).and_return("ORDER999")
+      order = Order.create!(
+        customer: customer,
+        restaurant: restaurant,
+        order_items_attributes: [
+          { item_option: first_item_option, observation: 'teste'},
+          { item_option: second_item_option }
+        ])
+      order.pending_kitchen!
+  
+      post "/api/v1/restaurants/#{restaurant.code}/orders/#{order.code}/to_canceled",
+           params: { canceled_reason: 'Não temos mais batatas' }.to_json,
+           headers: { 'CONTENT_TYPE' => 'application/json' }
+  
+      expect(response.status).to eq 200
+      json_response = JSON.parse(response.body)
+      expect(json_response['status']).to eq 'Cancelado'
+      expect(json_response['canceled_reason']).to eq 'Não temos mais batatas'
+
+
+    end
+
+    it 'return an error when canceled reason is not provided' do
+      allow(SecureRandom).to receive(:alphanumeric).and_return("REST99") 
+      restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
+                                      full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+      first_dish = Dish.create!(name: 'Batata frita', description: 'testando', calories: 10, restaurant: restaurant)
+      first_item_option = ItemOption.create!(description: 'Batata pequena', price: 10.00, item: first_dish)
+      second_item_option = ItemOption.create!(description: 'Batata grande', price: 15.00, item: first_dish)
+      customer = Customer.create!(name: 'Joãozinho', email: 'cliente@gmail.com', phone_number: '81987654321', cpf: CPF.generate, restaurant: restaurant)
+      
+      allow(SecureRandom).to receive(:alphanumeric).and_return("ORDER999")
+      order = Order.create!(
+        customer: customer,
+        restaurant: restaurant,
+        order_items_attributes: [
+          { item_option: first_item_option, observation: 'teste'},
+          { item_option: second_item_option }
+        ])
+      order.pending_kitchen!
+  
+      post "/api/v1/restaurants/#{restaurant.code}/orders/#{order.code}/to_canceled"
+      json_response = JSON.parse(response.body)
+      expect(json_response['details'].first).to eq 'Razão de Cancelamento deve ser especificada caso cancele o pedido'  
+      expect(response.status).to eq 422
+    end
+
+    it 'returns not found when order does not exist' do
+      restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
+                                      full_address: 'Rua da Hot, 721 - RJ', email: 'contato@lancheshot.com', phone_number: '81987654321')
+  
+      post "/api/v1/restaurants/#{restaurant.code}/orders/99999/to_canceled"
+  
+      expect(response.status).to eq 404
+    end
+  end
+  
 end

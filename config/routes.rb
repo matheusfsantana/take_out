@@ -25,7 +25,8 @@ Rails.application.routes.draw do
       post 'confirm', to: 'orders#confirm_order_status'
     end
   end
-  
+  get 'orders/search', to: 'orders#search'
+  get 'orders/result', to: 'orders#result'
   get 'items/search', to: 'items#search'
   post 'update_item_status/:item_id', to: "items#update_status", as: 'update_item_status'
   

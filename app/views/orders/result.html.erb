@@ -1,0 +1,53 @@
+<div class="w-full flex items-center justify-start mb-6">
+    <%= link_to orders_search_path do %>
+      <%= image_tag 'left_arrow.png'%>
+    <% end %>
+</div>
+
+
+<% if @order %>
+  <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-4xl mx-auto">
+    <h2 class="text-2xl font-semibold text-gray-800 text-center mb-4">
+      Pedido <%= @order.code %>
+    </h2>
+    <p class="text-gray-600 text-center">
+      <strong>Restaurante:</strong> <%= @order.restaurant.brand_name %><br>
+      <strong>Endereço:</strong> <%= @order.restaurant.full_address %><br>
+      <strong>Contato:</strong> <%= @order.restaurant.phone_number %>
+    </p>
+
+    <h3 class="text-lg font-medium text-gray-700 mt-6 mb-3">Histórico do Pedido</h3>
+    <table class="w-full table-auto border-collapse border border-gray-300 text-center">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="border border-gray-300 px-4 py-2">Data do Pedido</th>
+          <th class="border border-gray-300 px-4 py-2">Início do Preparo</th>
+          <th class="border border-gray-300 px-4 py-2">Pedido Pronto</th>
+          <th class="border border-gray-300 px-4 py-2">Pedido Retirado</th>
+          <th class="border border-gray-300 px-4 py-2">Cancelado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border border-gray-300 px-4 py-2"><%= format_date_to_brasilia(@order.order_date) || "N/A" %></td>
+          <td class="border border-gray-300 px-4 py-2"><%= format_date_to_brasilia(@order.in_preparation_date) || "N/A" %></td>
+          <td class="border border-gray-300 px-4 py-2"><%= format_date_to_brasilia(@order.ready_date) || "N/A" %></td>
+          <td class="border border-gray-300 px-4 py-2"><%= format_date_to_brasilia(@order.delivered_date) || "N/A" %></td>
+          <td class="border border-gray-300 px-4 py-2">
+            <% if @order.canceled_date.present? %>
+              <%= format_date_to_brasilia(@order.canceled_date) %><br>
+              <small><%= @order.canceled_reason %></small>
+            <% else %>
+                  N/A
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-md mx-auto text-center">
+    <p class="text-gray-800 text-lg font-medium">Pedido não encontrado.</p>
+  </div>
+<% end %>
+

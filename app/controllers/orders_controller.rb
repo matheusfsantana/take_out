@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   skip_before_action :redirect_if_is_employee
+  skip_before_action :check_if_user_has_restaurant, :authenticate_user!, only: [ :search, :result ]
 
   def new
     @menu = Menu.find_by(restaurant: user_restaurant, id: params[:menu_id])
@@ -38,6 +39,13 @@ class OrdersController < ApplicationController
   def confirm_order_status
     @order = Order.find_by(id: params[:id], restaurant: user_restaurant)
     redirect_to root_path, notice: 'Pedido confirmado' if @order.update(status: :pending_kitchen)
+  end
+
+  def search ; end
+
+  def result 
+    @order = Order.find_by(code: params[:code])
+    @restaurant = Restaurant.find(@order.restaurant_id) if @order
   end
 
   private

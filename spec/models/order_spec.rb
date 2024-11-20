@@ -34,6 +34,28 @@ RSpec.describe Order, type: :model do
       expect(order.valid?).to be_falsy
       expect(order.errors[:customer].first).to include 'é obrigatório(a)'
     end
+
+    it 'should be false when order is updated to canceled and no reason is provided' do
+      restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
+                                      full_address: 'Rua da Hot, 721 - RJ', email: 'contato@lancheshot.com', phone_number: '81987654321')
+      first_dish = Dish.create!(name: 'Batata frita', description: 'testando', calories: 10, restaurant: restaurant)
+      first_item_option = ItemOption.create!(description: 'Batata pequena', price: 10.00, item: first_dish)
+      second_item_option = ItemOption.create!(description: 'Batata grande', price: 15.00, item: first_dish)
+      customer = Customer.create!(name: 'Joãozinho', email: 'cliente@gmail.com', phone_number: '81987654321', cpf: CPF.generate, restaurant: restaurant)
+
+      order = Order.create!(
+        customer: customer,
+        restaurant: restaurant,
+        order_items_attributes: [
+        { item_option: first_item_option, observation: 'teste'},
+        { item_option: second_item_option }
+        ]
+      )
+      order.status = :canceled
+
+      expect(order.valid?).to be_falsy
+      expect(order.errors[:canceled_reason].first).to include 'deve ser especificada caso cancele o pedido'
+    end
   end
 
   describe 'generate a random code' do
@@ -128,6 +150,93 @@ RSpec.describe Order, type: :model do
 
       expect(order.status).to eq('pending_confirmation')
       expect(order.order_date).not_to be_nil
+    end
+  end
+
+  describe 'fill date when change status' do
+    it 'sets in_preparation_date when the status changes to pending_kitchen' do
+      restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
+                                      full_address: 'Rua da Hot, 721 - RJ', email: 'contato@lancheshot.com', phone_number: '81987654321')
+      first_dish = Dish.create!(name: 'Batata frita', description: 'testando', calories: 10, restaurant: restaurant)
+      first_item_option = ItemOption.create!(description: 'Batata pequena', price: 10.00, item: first_dish)
+      second_item_option = ItemOption.create!(description: 'Batata grande', price: 15.00, item: first_dish)
+      customer = Customer.create!(name: 'Joãozinho', email: 'cliente@gmail.com', phone_number: '81987654321', cpf: CPF.generate, restaurant: restaurant)
+
+      order = Order.create!(
+        customer: customer,
+        restaurant: restaurant,
+        order_items_attributes: [
+        { item_option: first_item_option, observation: 'teste'},
+        { item_option: second_item_option }
+        ]
+      )
+      order.pending_kitchen!
+
+      expect(order.in_preparation_date).not_to be_nil
+    end
+
+    it 'sets ready_date when the status changes to ready' do
+      restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
+                                      full_address: 'Rua da Hot, 721 - RJ', email: 'contato@lancheshot.com', phone_number: '81987654321')
+      first_dish = Dish.create!(name: 'Batata frita', description: 'testando', calories: 10, restaurant: restaurant)
+      first_item_option = ItemOption.create!(description: 'Batata pequena', price: 10.00, item: first_dish)
+      second_item_option = ItemOption.create!(description: 'Batata grande', price: 15.00, item: first_dish)
+      customer = Customer.create!(name: 'Joãozinho', email: 'cliente@gmail.com', phone_number: '81987654321', cpf: CPF.generate, restaurant: restaurant)
+
+      order = Order.create!(
+        customer: customer,
+        restaurant: restaurant,
+        order_items_attributes: [
+        { item_option: first_item_option, observation: 'teste'},
+        { item_option: second_item_option }
+        ]
+      )
+      order.ready!
+
+      expect(order.ready_date).not_to be_nil
+    end
+
+    it 'sets delivered_date when the status changes to delivered' do
+ restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
+                                      full_address: 'Rua da Hot, 721 - RJ', email: 'contato@lancheshot.com', phone_number: '81987654321')
+      first_dish = Dish.create!(name: 'Batata frita', description: 'testando', calories: 10, restaurant: restaurant)
+      first_item_option = ItemOption.create!(description: 'Batata pequena', price: 10.00, item: first_dish)
+      second_item_option = ItemOption.create!(description: 'Batata grande', price: 15.00, item: first_dish)
+      customer = Customer.create!(name: 'Joãozinho', email: 'cliente@gmail.com', phone_number: '81987654321', cpf: CPF.generate, restaurant: restaurant)
+
+      order = Order.create!(
+        customer: customer,
+        restaurant: restaurant,
+        order_items_attributes: [
+        { item_option: first_item_option, observation: 'teste'},
+        { item_option: second_item_option }
+        ]
+      )
+      order.delivered!
+
+      expect(order.delivered_date).not_to be_nil
+    end
+
+    it 'sets canceled_date when the status changes to canceled' do
+ restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: CNPJ.generate,
+                                      full_address: 'Rua da Hot, 721 - RJ', email: 'contato@lancheshot.com', phone_number: '81987654321')
+      first_dish = Dish.create!(name: 'Batata frita', description: 'testando', calories: 10, restaurant: restaurant)
+      first_item_option = ItemOption.create!(description: 'Batata pequena', price: 10.00, item: first_dish)
+      second_item_option = ItemOption.create!(description: 'Batata grande', price: 15.00, item: first_dish)
+      customer = Customer.create!(name: 'Joãozinho', email: 'cliente@gmail.com', phone_number: '81987654321', cpf: CPF.generate, restaurant: restaurant)
+
+      order = Order.create!(
+        customer: customer,
+        restaurant: restaurant,
+        order_items_attributes: [
+        { item_option: first_item_option, observation: 'teste'},
+        { item_option: second_item_option }
+        ]
+      )
+      order.canceled_reason = 'canceled'
+      order.canceled!
+
+      expect(order.canceled_date).not_to be_nil
     end
   end
 end

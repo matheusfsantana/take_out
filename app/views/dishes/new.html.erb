@@ -20,7 +20,7 @@
 
       <div class="col-span-2">
         <%= f.label :tag_ids, 'Marcador', class: "block text-sm font-medium text-gray-700" %>
-          <% if @tags.nil? %>
+          <% if @tags.blank? %>
             <p>Nenhum marcador cadastrado.</p>
           <% else %>
             <%= f.collection_check_boxes(:tag_ids, @tags, :id, :name) do |b| %>

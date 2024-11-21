@@ -14,6 +14,7 @@ describe 'User register a order' do
     menu = Menu.create!(name: 'Lanches', restaurant: restaurant)
     MenuItem.create!(menu: menu, item: first_dish)
     MenuItem.create!(menu: menu, item: first_beverage)
+    Customer.create!(name: 'Joãozinho', email: 'cliente@gmail.com', phone_number: '81987654321', cpf: '61354764080', restaurant: restaurant)
 
     login_as(user)
     visit root_path

@@ -49,3 +49,7 @@ Execute o comando para rodar a aplicação
 | -------- | -------- | -------- |-------- |
 |admin@gmail.com|password1234|owner (Dono do restaurante)| Acesso total |
 |employee@gmail.com|password1234|employee (Funcionário do restaurante)| Acesso aos pedidos, clientes e cardápios |
+
+## Link acompanhamento de pedidos
+
+http://127.0.0.1:3000/orders/search

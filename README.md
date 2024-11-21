@@ -41,7 +41,7 @@ Utilize o comando a seguir para criar o banco, fazer as migrations e rodar os se
 Execute o comando para rodar a aplicação
 
 ```bash
-   $ rails server
+   $ bin/dev
 ```
 
 ## Usuários

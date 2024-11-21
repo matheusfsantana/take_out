@@ -37,6 +37,11 @@ end
 first_dish = Dish.find_or_create_by!(name: 'Batata frita', restaurant: restaurant) do |dish|
   dish.description = 'testando'
   dish.calories = 10
+  dish.image.attach(
+    io: File.open(Rails.root.join('app/assets/images/seed_images/batata-frita.jpg')),
+    filename: 'batata-frita.jpg',
+    content_type: 'image/jpeg'       
+  )
 end
 
 first_beverage = Beverage.find_or_create_by!(name: 'Refrigerante lata', restaurant: restaurant) do |beverage|
@@ -44,6 +49,11 @@ first_beverage = Beverage.find_or_create_by!(name: 'Refrigerante lata', restaura
   beverage.description = 'teste'
   beverage.calories = 300
   beverage.alcoholic = false
+  beverage.image.attach(
+    io: File.open(Rails.root.join('app/assets/images/seed_images/refri-lata.jpg')),
+    filename: 'refri-lata.jpg',
+    content_type: 'image/jpeg' 
+  )
 end
 
 first_dish_option = ItemOption.find_or_create_by!(description: 'Batata pequena') do |option|

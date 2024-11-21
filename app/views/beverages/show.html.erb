@@ -36,7 +36,9 @@
   <div class="flex gap-2">
     <%= button_to @button_value, update_item_status_path(@beverage), method: :post, class: "bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700" %>
     <%= link_to "Editar Bebida", edit_beverage_path(@beverage), class: "bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700" %>
-    <%= button_to "Excluir Bebida", beverage_path(@beverage), method: :delete, class: "bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700" %>
+    <% if @beverage.item_options.empty? %>
+      <%= button_to "Excluir Bebida", beverage_path(@beverage), method: :delete, class: "bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700" %>
+    <% end %>
   </div>
 </div>   
 

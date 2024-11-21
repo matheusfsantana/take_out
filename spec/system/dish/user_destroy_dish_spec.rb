@@ -29,4 +29,18 @@ describe 'User destroy dish' do
     expect(Dish.exists?(dish.id)).to be_falsy
     expect(current_path).to eq dishes_path
   end
+
+  it 'and shouldnt see the delete button if dish has options registered' do
+    restaurant = Restaurant.create!(corporate_name: 'Hot Lanches', brand_name: 'hot lanches', cnpj: '34.651.791/0001-31',
+                                    full_address:'Rua da Hot, 721 - RJ',email:'contato@lancheshot.com', phone_number: '81987654321')
+    user = User.create!(restaurant: restaurant, email: 'joaozinho@gmail.com', password: 'password1234', name: 'Joao', last_name: 'da Silva', cpf: CPF.generate)
+    dish = Dish.create!(name: 'Bife a cavalo', description: 'Prato da casa', calories: 10, is_active: false, restaurant: restaurant)
+    ItemOption.create!(description: 'Individual', price: 30, item: dish)
+
+    login_as(user)
+    visit dish_path(dish)
+    
+    expect(page).not_to have_button 'Excluir Prato'
+
+  end
 end
